@@ -1,0 +1,29 @@
+generated: '2026-08-12'
+method: searched
+source: https://metadata.io/developers/ and registry searches of npm, PyPI, RubyGems, crates.io, Packagist
+  and the MCP registry, 2026-08-12
+package_count: 0
+packages: []
+note: 'Metadata ships NO first-party client library in any registry, by design. The developer docs state
+  the position explicitly: "No SDKs to maintain, no REST endpoints to manage, no OAuth flows to debug"
+  — the MCP server IS the client surface, and integration is a one-line `claude mcp add`. Searched npm
+  (text=metadataone, 0 results; no metadata.io-scoped package), the official MCP registry at registry.modelcontextprotocol.io
+  (search=metadata returns only unrelated third-party servers), and github.com/metadata-io, which is a
+  live org with no public repositories. Every code sample in the docs uses a generic MCP client, never
+  a Metadata package.'
+checked_registries:
+- registry: npm
+  query: metadataone
+  result: 0 packages
+  url: https://registry.npmjs.org/-/v1/search?text=metadataone
+  status: 200
+- registry: mcp-registry
+  query: metadata
+  result: no Metadata-owned server listed
+  url: https://registry.modelcontextprotocol.io/v0/servers?search=metadata
+  status: 200
+- registry: github
+  query: github.com/metadata-io
+  result: org exists, no public repositories
+  url: https://github.com/orgs/metadata-io/repositories
+  status: 200

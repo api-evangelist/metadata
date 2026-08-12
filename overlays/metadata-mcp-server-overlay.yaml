@@ -1,0 +1,61 @@
+# generated: '2026-08-12'
+# method: generated
+# source: openapi/metadata-mcp-server-openapi.json
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Metadata MCP Server OpenAPI
+  version: 1.0.0
+extends: ../openapi/metadata-mcp-server-openapi.json
+x-provenance:
+  generated: '2026-08-12'
+  method: generated
+  source: openapi/metadata-mcp-server-openapi.json
+  note: >-
+    The served spec at https://mcp-server.metadata.io/openapi.json carries no servers[],
+    no description, no contact, no licence and no tags, and describes only two health
+    endpoints. This overlay adds the missing document-level metadata that is verifiable
+    from Metadata's own published surface, and marks plainly that the product surface is
+    the 141-tool MCP endpoint on the same host rather than anything in this REST document.
+    It never mutates the original spec.
+actions:
+  - target: $.info
+    update:
+      description: >-
+        Health endpoints for the Metadata (MetadataONE) MCP server. This OpenAPI describes
+        infrastructure liveness only. Metadata's product surface is the Model Context Protocol
+        endpoint at https://mcp-server.metadata.io/mcp, which exposes 141 tools for B2B paid
+        media execution across LinkedIn, Meta, Google, Microsoft and Reddit. See
+        https://metadata.io/developers/tools/ for the published tool catalog.
+      contact:
+        name: Metadata Developer Support
+        email: support@metadata.io
+        url: https://metadata.io/developers/support.html
+      termsOfService: https://metadata.io/terms-of-use/
+      x-provider: Metadata (metadata.io)
+      x-docs: https://metadata.io/developers/
+  - target: $
+    update:
+      servers:
+        - url: https://mcp-server.metadata.io
+          description: Production MCP server host (verified live 2026-08-12)
+      tags:
+        - name: Health
+          description: Liveness probes for the MCP server.
+      x-mcp:
+        endpoint: https://mcp-server.metadata.io/mcp
+        transport: streamable-http
+        protocolVersion: '2025-06-18'
+        toolCount: 141
+        authenticated: true
+        authorizationServer: https://mcp-server.metadata.io/
+        protectedResourceMetadata: https://mcp-server.metadata.io/.well-known/oauth-protected-resource/mcp
+  - target: $.paths['/health'].get
+    update:
+      tags: [Health]
+      security: []
+      x-authentication: none — verified anonymous 2026-08-12
+  - target: $.paths['/mcp/health'].get
+    update:
+      tags: [Health]
+      security: []
+      x-authentication: none — verified anonymous 2026-08-12

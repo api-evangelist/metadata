@@ -1,0 +1,190 @@
+generated: '2026-08-12'
+method: probed
+source: live HTTP probes of every Metadata host named in apis.yml, llms.txt and the developer docs
+probed: '2026-08-12'
+hosts:
+- host: metadata.io
+  paths:
+  - path: /.well-known/security.txt
+    status: 301
+    file: null
+    note: 301 redirects to the marketing homepage (https://metadata.io/) which returns HTML — a soft redirect,
+      not a security.txt document
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  - path: /llms.txt
+    status: 200
+    file: llms/metadata-llms.txt
+    note: real llms.txt document, saved verbatim
+- host: mcp-server.metadata.io
+  paths:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: well-known/metadata-oauth-authorization-server.json
+    note: real RFC 8414 authorization server metadata (JSON)
+  - path: /.well-known/oauth-protected-resource/mcp
+    status: 200
+    file: well-known/metadata-oauth-protected-resource.json
+    note: real RFC 9728 protected resource metadata (JSON); discovered from the WWW-Authenticate header
+      on a 401 from /mcp
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /openapi.json
+    status: 200
+    file: openapi/metadata-mcp-server-openapi.json
+    note: real OpenAPI 3.1.0, two health operations
+  - path: /llms.txt
+    status: 404
+    file: null
+- host: platform.metadata.io
+  paths:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    note: FALSE POSITIVE — single-page-app catch-all returns the app HTML shell (<!doctype html>, title
+      "Metadata") for every /.well-known/* path. Not a document; treated as a miss.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    note: FALSE POSITIVE — same SPA HTML shell
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    note: FALSE POSITIVE — same SPA HTML shell
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  - path: /llms.txt
+    status: 404
+    file: null
+- host: app.metadataone.com
+  paths:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: help.metadata.io
+  paths:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+- host: api.metadata.io
+  paths:
+  - path: /
+    status: 404
+    file: null
+    note: host resolves and answers (nginx, Flask-style 404 body) but serves nothing at any probed path
+  - path: /openapi.json
+    status: 404
+    file: null
+  - path: /swagger.json
+    status: 404
+    file: null
+  - path: /graphql
+    status: 404
+    file: null
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+- host: developers.metadata.io
+  paths:
+  - path: /
+    status: 0
+    file: null
+    note: DOES NOT RESOLVE — no A or CNAME record. metadata.io/llms.txt advertises this host six times
+      (developer docs, quickstart, authentication, tool catalog, guides); the real docs live at https://metadata.io/developers/.
+      This is a live defect in the provider llms.txt.
+- host: mcp.metadata.io
+  paths:
+  - path: /
+    status: 0
+    file: null
+    note: DOES NOT RESOLVE — no DNS record
+- host: mcp.metadataone.com
+  paths:
+  - path: /sse
+    status: 0
+    file: null
+    note: DOES NOT RESOLVE — no DNS record; the Claude Code setup guide gives this SSE URL for Paperclip
+      and OpenClaw clients
+summary:
+  real_documents: 3
+  real_document_paths:
+  - https://metadata.io/llms.txt
+  - https://mcp-server.metadata.io/.well-known/oauth-authorization-server
+  - https://mcp-server.metadata.io/.well-known/oauth-protected-resource/mcp
+  security_txt: false
+  agent_card: false
+  api_catalog: false
+  spa_false_positives: 3
+  nonresolving_advertised_hosts:
+  - developers.metadata.io
+  - mcp.metadata.io
+  - mcp.metadataone.com

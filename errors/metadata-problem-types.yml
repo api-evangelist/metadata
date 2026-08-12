@@ -1,0 +1,42 @@
+generated: '2026-08-12'
+method: searched
+source: https://metadata.io/developers/authentication.html
+docs: https://metadata.io/developers/authentication.html
+format: vendor
+format_note: Metadata publishes a named error-code table (HTTP status + machine code + meaning), not RFC
+  9457 application/problem+json. The docs state "Errors carry actionable messages" but publish no error
+  envelope schema.
+envelope: not published
+problem_type_count: 5
+problem_types:
+- code: missing_key
+  http_status: 401
+  title: No Authorization header
+  remediation: 'Send Authorization: Bearer <METADATA_API_KEY>.'
+- code: invalid_key
+  http_status: 401
+  title: Key is revoked, rotated out, or malformed
+  remediation: Mint a fresh key in Settings > API Keys. Note the 15-minute grace window after rotation.
+- code: scope_denied
+  http_status: 403
+  title: Key is valid but lacks the scope for this tool
+  remediation: Re-mint the key with the required scope (see scopes/metadata-scopes.yml); launch tools
+    need launch:campaigns.
+- code: account_mismatch
+  http_status: 403
+  title: X-Account-ID not accessible to this user
+  remediation: Call list_user_accounts and pass an account id the key actually has access to.
+- code: insufficient_credits
+  http_status: 402
+  title: Credit balance is zero
+  remediation: Top up or upgrade tier. Read tools cost 1 credit, create/update 5, launches and creative
+    generation 10-25.
+observed:
+- http_status: 401
+  url: https://mcp-server.metadata.io/mcp
+  method: POST tools/list
+  www_authenticate: Bearer resource_metadata="https://mcp-server.metadata.io/.well-known/oauth-protected-resource/mcp"
+  body: empty
+  fetched: '2026-08-12'
+  note: The live 401 carries a correct RFC 9728 WWW-Authenticate challenge but no body — the machine codes
+    above are documented, not returned on an anonymous call.

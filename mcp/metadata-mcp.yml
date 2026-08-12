@@ -1,0 +1,908 @@
+generated: '2026-08-12'
+method: searched
+source: https://metadata.io/developers/tools/
+name: Metadata MCP Server (MetadataONE)
+status: live
+vendor: Metadata (metadata.io)
+ownership_note: Served from mcp-server.metadata.io, a subdomain Metadata controls; the marketing page
+  metadata.io/mcp-server and the developer docs at metadata.io/developers/ both publish this endpoint,
+  and metadataone.com 301s to metadata.io. The server is branded "MetadataONE" in the docs and "MCP Metadata
+  Server" in its own openapi.json.
+endpoint: https://mcp-server.metadata.io/mcp
+transport:
+- streamable-http
+transport_note: Docs also reference an SSE endpoint https://mcp.metadataone.com/sse for Paperclip/OpenClaw,
+  but that host does not resolve in DNS (probed 2026-08-12); the working transport is HTTP at mcp-server.metadata.io/mcp.
+protocol_version: '2025-06-18'
+install: claude mcp add --transport http metadataone https://mcp-server.metadata.io/mcp
+server_version: v1.0
+catalog_updated: '2026-07-12'
+catalog_updated_source: metadata.io/developers/tools/ states "Updated 2026-07-12 from the live server
+  schema"
+docs_version: v2025.04
+authentication:
+  type: bearer
+  env_var: METADATA_API_KEY
+  key_prefix: md1_live_
+  minted_at: Settings > API Keys in the Metadata app
+  account_header: X-Account-ID (required for multi-account users after list_user_accounts)
+  oauth:
+    authorization_server: https://mcp-server.metadata.io/
+    protected_resource_metadata: https://mcp-server.metadata.io/.well-known/oauth-protected-resource/mcp
+    scopes_supported:
+    - openid
+    - offline_access
+    dynamic_client_registration: true
+    pkce:
+    - S256
+live_introspection:
+  attempted: true
+  fetched: '2026-08-12'
+  method: POST tools/list and initialize (JSON-RPC 2.0)
+  http_status: 401
+  www_authenticate: Bearer resource_metadata="https://mcp-server.metadata.io/.well-known/oauth-protected-resource/mcp"
+  note: The live tool schemas are auth-gated. Tool names, descriptions and key parameters below are taken
+    verbatim from the provider-published catalog at metadata.io/developers/tools/, which the provider
+    states is generated from the live server schema. Full JSON inputSchemas require an authenticated tools/list.
+channels:
+- LinkedIn
+- Meta (Facebook, Instagram)
+- Google Ads
+- Microsoft/Bing
+- Reddit
+- Display
+- Video
+- LLM channels
+metering:
+  model: credits per tool call
+  published_bands: Read operations 1 credit; create/update 5 credits; campaign launches and creative generation
+    10-25 credits
+  source: https://metadata.io/mcp-server
+  note: Per-tool credit costs are published on the marketing page metadata.io/mcp-server but are not repeated
+    as structured data in the docs tool reference; they are not captured per-tool here.
+tool_count: 141
+category_count: 9
+categories:
+- name: Audiences & Targeting
+  tool_count: 31
+- name: Campaigns & Budgets
+  tool_count: 21
+- name: Ads & Creative
+  tool_count: 25
+- name: Offers
+  tool_count: 5
+- name: Keywords & Paid Search
+  tool_count: 14
+- name: Analytics & Insights
+  tool_count: 21
+- name: Ad Extensions
+  tool_count: 15
+- name: Accounts & Integrations
+  tool_count: 8
+- name: Utilities
+  tool_count: 1
+tools:
+- name: archive_audience
+  category: Audiences & Targeting
+  description: Archives (deletes) a custom audience from the platform. Identify the audience by its numeric
+    ID or by name; if only a name is given, the tool resolves the ID automatically.
+  key_parameters: custom_audience_id, audience_name
+- name: create_audience_from_segment
+  category: Audiences & Targeting
+  description: Creates a website retargeting audience from a saved insights segment, including accounts
+    that match the segment's criteria within a lookback window of 1 to 365 days. The segment must exist
+    and be in READY status; create one first with create_segment if needed.
+  key_parameters: segment_id, name, lookback_window
+- name: create_bombora_audience
+  category: Audiences & Targeting
+  description: Creates a B2B audience built on Bombora buyer intent topics, combined with company firmographics,
+    contact attributes, and geographic filters. Verify available intent topics first; at least one topic
+    is required.
+  key_parameters: name, topics, industries, employees, seniority_include_ids, location_country_ids
+- name: create_csv_upload_linkedin_native_audience
+  category: Audiences & Targeting
+  description: Creates a LinkedIn-native audience from an uploaded CSV of company accounts, optionally
+    layered with LinkedIn-native criteria such as employee ranges, revenue, job titles, and skills. Supply
+    the account list either inline or as a CSV URL.
+  key_parameters: audience_name, companies, companies_source_csv_url, employees, job_titles, revenues
+- name: create_facebook_native_criteria_audience
+  category: Audiences & Targeting
+  description: 'Creates a Facebook audience using native Facebook targeting criteria: industry categories,
+    countries, job titles, interests, and age range. Supports an estimate-only mode to preview audience
+    size before creating.'
+  key_parameters: name, min_age, max_age, industries, countries, estimate_only
+- name: create_firmographic_audience
+  category: Audiences & Targeting
+  description: Creates a B2B audience based on company attributes (industry, employee count, revenue)
+    plus contact-level criteria like seniority, job function, and location. The default and most commonly
+    used audience type; supports estimate-only size previews.
+  key_parameters: name, industries, employees, revenue, seniority_include_ids, estimate_only
+- name: create_g2_intent_dynamic_audience
+  category: Audiences & Targeting
+  description: Creates a dynamic G2 intent audience that refreshes daily as G2 buying signals update,
+    filtered by buying stage and contact criteria. Requires a connected G2 integration and at least one
+    buying stage.
+  key_parameters: name, intent_days, buying_stages, job_title_includes, location_country_ids, contacts_per_company_limit
+- name: create_g2_intent_linkedin_native_dynamic_audience
+  category: Audiences & Targeting
+  description: Creates a daily-refreshing G2 intent audience with LinkedIn-native targeting (employee
+    ranges, revenue, job titles, skills, companies). Requires both G2 and LinkedIn integrations to be
+    connected.
+  key_parameters: name, intent_days, buying_stages, employees, job_titles, revenues
+- name: create_g2_intent_static_audience
+  category: Audiences & Targeting
+  description: Creates a static G2 intent audience captured as a one-time snapshot at creation, filtered
+    by buying stage and contact criteria. Unlike the dynamic variants, it does not refresh daily.
+  key_parameters: name, intent_days, buying_stages, job_function_include_ids, seniority_include_ids, location_country_ids
+- name: create_linkedin_native_criteria_audience
+  category: Audiences & Targeting
+  description: Builds a LinkedIn audience from native targeting criteria — job titles, skills, company
+    names, employee-count ranges, revenue ranges, and countries. Supports an estimate-only mode that previews
+    expected audience size without creating anything.
+  key_parameters: name, job_titles, skills, company_names, employees, estimate_only
+- name: create_reddit_target_group
+  category: Audiences & Targeting
+  description: Creates a Reddit target group with include/exclude targeting rules built from communities
+    (subreddits), interests, keywords, and location. All criteria references must come from a prior criteria
+    search, and location must be the first include block.
+  key_parameters: name, targeting.include, targeting.exclude
+- name: create_retargeting_audience
+  category: Audiences & Targeting
+  description: Imports an existing retargeting audience from a native ad channel (Google Ads, LinkedIn,
+    or Facebook) into the platform. Use the retargeting-audience listing tool first to fetch the audience
+    object, then pass it here to create the audience.
+  key_parameters: audience_data (id, name, type, subtype, channel, externalAccountId)
+- name: create_segment
+  category: Audiences & Targeting
+  description: Creates a segment from insights criteria, combining field-level match rules with AND/OR
+    logic. Discover valid fields with the insights criteria search first; the segment returns with a READY,
+    PENDING, or FAILED status.
+  key_parameters: name, criteria.operator, criteria.match (field, operator, type, value)
+- name: create_target_group
+  category: Audiences & Targeting
+  description: Creates a LinkedIn target group with include and exclude rules, including the ability to
+    exclude existing audiences. Criteria IDs must come from the target-group criteria search, and location
+    must be the first include criterion.
+  key_parameters: name, channel, targeting.include, targeting.exclude
+- name: create_technographic_audience
+  category: Audiences & Targeting
+  description: Builds a B2B audience of companies and contacts based on the technologies they use (e.g.
+    Salesforce, HubSpot), optionally layered with firmographic filters like industry, company size, revenue,
+    job function, seniority, and location. Supports an estimate-only mode to preview audience size before
+    creating it.
+  key_parameters: name, technologies, industries, employees, seniority_include_ids, estimate_only
+- name: estimate_target_group
+  category: Audiences & Targeting
+  description: Estimate the audience size for a set of targeting criteria before creating a target group,
+    supporting both include and exclude rules for criteria and audiences. Currently LinkedIn only; all
+    criteria IDs must come from the target-group criteria search first, with location as the first include
+    block.
+  key_parameters: channel, targeting.include, targeting.exclude
+- name: get_abm_account_lists
+  category: Audiences & Targeting
+  description: Lists account lists from the ABM library, including uploaded CSV lists and website retargeting
+    lists, with filtering by filename, status, and type plus pagination. Returns account counts, readiness
+    status, and audience associations.
+  key_parameters: filename, status, type, page, size, sort
+- name: get_audience_details
+  category: Audiences & Targeting
+  description: Retrieves custom audience information — configuration, targeting criteria, size metrics,
+    and performance — filtered by audience name with pagination and sorting.
+  key_parameters: name, page, size, sort
+- name: get_custom_audience_contacts_csv_url
+  category: Audiences & Targeting
+  description: Generates a CSV export of a custom audience's contacts or companies and returns a time-limited
+    presigned download URL. Supports custom audiences only (not native audiences) and requires elevated
+    permissions.
+  key_parameters: audience_name
+- name: get_deep_audience_details
+  category: Audiences & Targeting
+  description: Retrieves complete configuration for one or more audiences, including full targeting criteria,
+    segment settings, lookback windows, and composition metadata. Use after listing audiences to inspect
+    or compare detailed setups.
+  key_parameters: audience_ids
+- name: get_intent_topics
+  category: Audiences & Targeting
+  description: 'Lists the buyer intent topics available for Bombora intent-based audience creation. Call
+    this first: if no topics are returned, Bombora is unavailable for the account and a firmographic audience
+    should be used instead.'
+  key_parameters: (none)
+- name: get_matched_audiences
+  category: Audiences & Targeting
+  description: Retrieves custom audiences that match specified targeting types for a given advertising
+    channel, returning the exact id/name/type/matchCount shape needed to attach audiences to campaigns
+    or target groups.
+  key_parameters: type, channel, page, size, sort
+- name: get_retargeting_audiences
+  category: Audiences & Targeting
+  description: Lists all retargeting and native audiences available for a given channel (Google Ads, LinkedIn,
+    or Facebook), including IDs, names, match counts, and subtypes. Useful for discovering existing audiences
+    before building campaigns.
+  key_parameters: channel
+- name: list_target_groups
+  category: Audiences & Targeting
+  description: List and search target groups with case-insensitive partial name matching. Returns a paginated
+    set of group IDs, names, channels, audience sizes, and statuses; use the ID to retrieve full details.
+  key_parameters: name, sort
+- name: retrieve_target_group_by_id
+  category: Audiences & Targeting
+  description: Retrieve full details for a target group by its numeric ID, including audiences, targeting
+    criteria, channel, status, and estimated size. Use list_target_groups first if you only know the name.
+  key_parameters: target_group_id
+- name: search_reddit_criteria
+  category: Audiences & Targeting
+  description: Look up valid Reddit targeting options — communities, interests, contextual keywords, and
+    locations — returning the external IDs and names needed to build a Reddit target group.
+  key_parameters: criteria_type, search_terms
+- name: search_target_group_criteria
+  category: Audiences & Targeting
+  description: Retrieve or search the valid LinkedIn targeting criteria values (locations, industries,
+    seniority, job titles, skills, interests, and more) and their IDs for use when creating or updating
+    a target group.
+  key_parameters: channel, criteria_type, search_terms, exact_match, reference_type
+- name: unarchive_audience
+  category: Audiences & Targeting
+  description: Restore a previously archived custom audience, identified by numeric ID or by name (the
+    name is resolved to an ID automatically). At least one identifier is required.
+  key_parameters: custom_audience_id, audience_name
+- name: update_target_group
+  category: Audiences & Targeting
+  description: Updates a target group's name and/or targeting criteria, including both include and exclude
+    rules. This is a full-replace (PUT) update, so the complete current configuration must be provided
+    along with any changes.
+  key_parameters: target_group_id, name, targeting
+- name: upload_account_list_csv_audience
+  category: Audiences & Targeting
+  description: Uploads a list of company accounts (name + website) as a CSV and creates an account-list
+    audience, with optional contact-level filters such as job title, seniority, and geography layered
+    on top. Accepts either an inline company map or a public CSV URL.
+  key_parameters: audience_name, companies, companies_source_csv_url, job_title_includes, seniority_include_ids,
+    location_country_ids
+- name: upload_contact_list_csv_audience
+  category: Audiences & Targeting
+  description: Uploads a list of individual contacts (email, name, job title, company) as a CSV and creates
+    a contact-list audience. Accepts either an inline array of 300 to 300,000 contacts or a public CSV
+    URL.
+  key_parameters: audience_name, contacts, contacts_source_csv_url
+- name: add_and_edit_campaign_elements
+  category: Campaigns & Budgets
+  description: Adds audiences, ads, offers, target groups, and keywords to an existing Precision (1x1x1)
+    campaign, and edits campaign-level properties such as name, budget group, schedule dates, and per-channel
+    offers. Supports LinkedIn, Facebook, Instagram, Google Ads, and Reddit; note that Lead Gen offers
+    are locked to the channel they were created for.
+  key_parameters: campaign_data.campaignId, campaign_data.name, campaign_data.budgetGroup, campaign_data.startDate/endDate,
+    per-channel objects (linkedin, facebook, google, instagram, reddit)
+- name: add_and_edit_native_campaign_elements
+  category: Campaigns & Budgets
+  description: 'Edits an existing Channel-First (Native, NxNxN) campaign: appends new ad containers (one
+    audience with ad-offer pairs), modifies or deletes existing containers, attaches target groups, and
+    updates campaign-level fields like name, budget group, and dates. Use this for Native campaigns only;
+    Precision campaigns use add_and_edit_campaign_elements.'
+  key_parameters: campaign_data.campaignId, per-channel containers[], modify_containers[], target_groups[],
+    startDate/endDate, budgetGroup
+- name: create_budget_group
+  category: Campaigns & Budgets
+  description: Creates or updates a budget group that controls how much campaigns can spend. Supports
+    Lead Generation (CPL) and Brand Awareness (CTR/CPC) configurations with monthly caps, benchmarks,
+    and budget redistribution strategies.
+  key_parameters: data.name, data.goal, data.monthlyCap, data.budgetType, data.benchmark, data.budgetRedistributionStrategy
+- name: create_campaign
+  category: Campaigns & Budgets
+  description: Creates a multi-channel campaign (LinkedIn, Facebook, Instagram, Google, Microsoft, Reddit)
+    using the Precision Optimization (1x1x1) structure, where every audience x ad x offer combination
+    runs as its own isolated experiment. This is the default campaign structure.
+  key_parameters: campaign_data.name, campaignType, startDate, endDate, budgetGroup, per-channel audiences/ads/offers
+- name: create_native_structure_campaign
+  category: Campaigns & Budgets
+  description: Creates a multi-channel campaign using the Channel First (Native Structure, N×N×N) layout,
+    where audiences, ads, and offers are grouped into per-channel containers and optimized together by
+    each ad platform's native algorithm, with unified pacing and reporting. Supports LinkedIn, Facebook,
+    Instagram, Google, Microsoft, and Reddit blocks.
+  key_parameters: campaign_data (name, campaignType, startDate, endDate, budgetGroup, per-channel containers)
+- name: duplicate_campaign
+  category: Campaigns & Budgets
+  description: Create a new draft campaign as a deep copy of an existing one, carrying over the goal,
+    budget group, landing pages, and every enabled channel with its audiences, ads, keywords, offers,
+    and bid settings. The copy starts in draft and spends no budget until scheduled and launched.
+  key_parameters: campaign_id, name
+- name: get_budget_group
+  category: Campaigns & Budgets
+  description: Returns the configuration and settings of a budget group by name, including its campaigns,
+    budget allocation, and metadata. For spend or performance metrics, use budget_group_performance instead.
+  key_parameters: name
+- name: get_campaign_by_wizard_id
+  category: Campaigns & Budgets
+  description: Retrieves full campaign details by campaign ID, including status, dates, budget group,
+    per-channel configuration (budgets, audiences, ad groups, lead-gen forms, bid strategy), and summary
+    statistics.
+  key_parameters: campaign_id
+- name: launch_campaign
+  category: Campaigns & Budgets
+  description: Launches a draft campaign as a live campaign that immediately begins spending budget and
+    serving ads across connected channels. Requires explicit user confirmation and at least one connected
+    advertising channel.
+  key_parameters: campaign_id
+- name: list_budget_groups
+  category: Campaigns & Budgets
+  description: Browse all budget groups in the account with pagination and flexible sorting by spend,
+    budget, leads, CPL, and more. Use it for an at-a-glance overview of budget allocation; to look up
+    a single group by name, use get_budget_group instead.
+  key_parameters: page, size, sort_by, sort_order
+- name: list_wizard_campaigns
+  category: Campaigns & Budgets
+  description: List the account's Metadata-native campaigns with pagination, sorting (spend, leads, CPL,
+    dates, and more), and independent campaign-status and experiment-status filters that mirror the UI
+    tabs. For details on one named campaign, use campaign search instead.
+  key_parameters: status, experiment_statuses, name, sort_by, sort_order, page
+- name: manage_campaign
+  category: Campaigns & Budgets
+  description: Pause an active campaign or restart a paused one by campaign ID. Pausing stops ad serving
+    and budget spend; only Active campaigns can be paused and only Paused campaigns can be restarted.
+  key_parameters: campaign_id, action
+- name: remove_ad_from_campaign
+  category: Campaigns & Budgets
+  description: Remove specific ads (ad groups) from one or more channels in an existing campaign, referenced
+    by human-readable channel type and ad name. Supports removing multiple ads across multiple channels
+    in a single call.
+  key_parameters: campaign_id, channel_ads
+- name: remove_audiences_from_campaign
+  category: Campaigns & Budgets
+  description: Detach named audiences from one or more channels in an existing campaign. Audience and
+    channel IDs are resolved automatically from the names you provide; multiple audiences across channels
+    can be removed in one call.
+  key_parameters: campaign_id, channel_audiences
+- name: remove_channels_from_campaign
+  category: Campaigns & Budgets
+  description: Disable one or more entire channels (e.g. Facebook, Google Ads) from an existing campaign.
+    Returns the campaign state before and after the change.
+  key_parameters: campaign_id, channels
+- name: remove_target_groups_from_campaign
+  category: Campaigns & Budgets
+  description: Detach named targeting groups from one or more channels in an existing campaign. Targeting
+    groups are distinct from audiences; use the audience-removal tool for standard audiences.
+  key_parameters: campaign_id, channel_target_groups
+- name: search_campaigns_by_names
+  category: Campaigns & Budgets
+  description: Find campaigns by full or partial name (case-insensitive) and get their IDs and current
+    status (Active, Paused, Draft, Completed). Use this before launching, updating, or referencing any
+    campaign.
+  key_parameters: campaign_names
+- name: search_experiments
+  category: Campaigns & Budgets
+  description: 'Search experiments with flexible, combinable filters: partial name match on experiment
+    or campaign name, budget group IDs, and launch status. Supports pagination and sorting.'
+  key_parameters: search_name, budget_group_ids, launched_experiment_statuses, page, size
+- name: set_search_channel_final_url_suffix
+  category: Campaigns & Budgets
+  description: Set or clear the Final URL Suffix (typically UTM tracking parameters) on a campaign's Google
+    Ads or Microsoft Ads channel. The suffix is appended to every final URL served; pass an empty string
+    to clear it.
+  key_parameters: campaign_id, channel, final_url_suffix
+- name: update_experiments_daily_budgets
+  category: Campaigns & Budgets
+  description: Updates the daily budget allocation for one or more experiments in a single call. Accepts
+    budget values as numbers or strings with dot or comma decimal separators.
+  key_parameters: budgets
+- name: update_reddit_channel_settings
+  category: Campaigns & Budgets
+  description: 'Updates the Reddit channel settings of a draft campaign: native objective, comment permissions,
+    feed/conversations placements, conversion pixel, and manual bid amount. Edits are only accepted while
+    the campaign is still in draft.'
+  key_parameters: campaign_id, objective, allow_comments, placements, conversion_pixel_id, bid_amount
+- name: archive_ad
+  category: Ads & Creative
+  description: Archives (soft-deletes) one or more ads, removing them from the active ad library. Archived
+    ads retain their ID, creative, and history and can be restored later with unarchive_ad.
+  key_parameters: ids
+- name: create_update_carousel_ad
+  category: Ads & Creative
+  description: 'Creates or updates a Reddit carousel ad: a single ad with 2-6 swipeable image cards sharing
+    one headline, where each card can have its own call-to-action. Upload each card image to the creative
+    library first, then reference the image IDs here.'
+  key_parameters: adName, headline, cards (imageLibraryId, cta), text, id
+- name: create_update_convo_ad
+  category: Ads & Creative
+  description: 'Creates or updates a LinkedIn Conversation Ad: a branching in-message chat built as a
+    graph of message steps, each with 1-5 action buttons that jump to another step, open a URL, or trigger
+    the campaign''s main call-to-action. Requires a valid LinkedIn sender fetched beforehand.'
+  key_parameters: name, senderId, senderName, headlineText, steps, bannerCreativeLibraryId
+- name: create_update_document_ad
+  category: Ads & Creative
+  description: Creates or updates a LinkedIn Document Ad that promotes a PDF (whitepaper, ebook, report)
+    natively in the feed, with a preview of the first pages and an unlock gate for the full document.
+    The document must already exist in the creative library as a DOCUMENT asset.
+  key_parameters: name, libraryId, headline, text, maxPreviewPages, id
+- name: create_update_google_ads_ad
+  category: Ads & Creative
+  description: 'Create a new Google Ads responsive text ad or update an existing one by ID. Enforces Google''s
+    hard character limits: 3-15 headlines of up to 30 characters each and 1-4 descriptions of up to 90
+    characters each.'
+  key_parameters: name, headlines, descriptions, id
+- name: create_update_image_ad
+  category: Ads & Creative
+  description: Create or update image or GIF ads across Facebook, Instagram, LinkedIn, and Reddit in a
+    single batch call, with per-channel copy, landing URLs, and CTA options. Upload the creative first
+    to obtain the image library ID passed as creativeID.
+  key_parameters: ads_data (adName, channels, creativeID, per-channel display URLs, metaCTA/linkedinCTA/redditCTA,
+    id)
+- name: create_update_linkedin_message_ad
+  category: Ads & Creative
+  description: 'Create or update a LinkedIn Sponsored Message ad: a one-shot inbox message with a subject
+    line, body (supports personalization macros), optional banner image, and a single CTA button. The
+    sender must come from the account''s approved LinkedIn sender list.'
+  key_parameters: name, senderId, senderName, headlineText, messageText, actionText
+- name: create_update_video_ad
+  category: Ads & Creative
+  description: Create or update video ads across Facebook, Instagram, LinkedIn, and Reddit in one batch
+    call, with per-channel copy, absolute landing-page URLs, and CTAs. Upload the video first to get a
+    creativeID; Reddit video ads additionally require a separate image thumbnail.
+  key_parameters: ads_data (adName, channels, creativeID, per-channel display URLs, CTAs, redditThumbnailLibraryId)
+- name: edit_brand_creative
+  category: Ads & Creative
+  description: Edit an existing creative image with AI while preserving brand consistency — change headlines,
+    CTAs, hero graphics, badges, colors, or multiple elements in one natural-language instruction. Returns
+    a hosted URL for the edited image, which can be chained into further edits.
+  key_parameters: image_source, edit_instruction, domain
+- name: fetch_creative_details
+  category: Ads & Creative
+  description: Fetches detailed metadata for a specific creative asset in the library by ID, including
+    name, content type, file properties, timestamps, visibility, and preview URLs. Useful for validating
+    creative IDs before ad creation.
+  key_parameters: creative_id
+- name: fix_flexible_creative
+  category: Ads & Creative
+  description: Applies a free-text AI edit to a flexible creative's background image (for example, removing
+    glare or changing scenery) and returns the edited image URL. Text and logo layers are never touched.
+  key_parameters: image_source, edit_instruction, domain
+- name: generate_brand_creative
+  category: Ads & Creative
+  description: Generates a finished, flat branded ad image using AI and the company's brand kit, with
+    the headline and CTA baked into the pixels. Best when the image feeds directly into an ad or campaign;
+    use the flexible variant for editable creatives.
+  key_parameters: domain, headline, instructions, platform, include_logo, logo_url
+- name: generate_brand_kit
+  category: Ads & Creative
+  description: Analyzes a company's website to extract its brand identity — logo, colors, fonts, and style
+    — and saves it as a brand kit used for consistent ad creative generation.
+  key_parameters: domain, brand_name, force_regenerate, sample_ad_urls
+- name: generate_flexible_brand_creative
+  category: Ads & Creative
+  description: 'Generates an editable, layered brand creative: an AI background scene plus separately
+    positioned text, CTA, and logo layers returned as a structured layout document. The default choice
+    when the user wants to review or tweak a creative before finalizing.'
+  key_parameters: domain, instructions, headline, cta, platform, include_logo
+- name: get_ad_details
+  category: Ads & Creative
+  description: Fetches complete details and configuration for one or more ads by ID, including ad copy,
+    headline, CTA, links, and associated creative library assets. Useful for inspecting an ad before editing
+    or analyzing its setup.
+  key_parameters: ids
+- name: get_brand_kit
+  category: Ads & Creative
+  description: Returns the stored brand kit for a company domain, including logos, colors, fonts, description,
+    and industries. The brand kit must have been previously created via generate_brand_kit.
+  key_parameters: domain
+- name: get_linkedin_senders
+  category: Ads & Creative
+  description: Lists the LinkedIn sender identities approved for Sponsored Messaging (Conversation Ads
+    and Message Ads) on the connected ad account. Call before creating a conversation or message ad, since
+    senderId and senderName must come from this list.
+  key_parameters: (none)
+- name: regenerate_flexible_background
+  category: Ads & Creative
+  description: Regenerate only the background scene of a flexible creative while keeping text, CTA, and
+    logo layers untouched. Returns a new background image URL; optionally guide the style with the current
+    background image or pin a dominant color.
+  key_parameters: domain, instructions, platform, image_source, background_hex
+- name: render_flexible_creative
+  category: Ads & Creative
+  description: Flatten a layered flexible-creative document into a final PNG that is pixel-identical to
+    the editor preview, and optionally upload it to the creatives library. Returns the rendered image
+    URL, library image ID, and pixel dimensions.
+  key_parameters: design, name, upload_to_library
+- name: search_ads_by_names
+  category: Ads & Creative
+  description: Search the ad library by name with partial, case-insensitive matching and pagination. Returns
+    ad IDs, channel and ad type, status, and creative image URLs, with a status filter for active, archived,
+    or all ads.
+  key_parameters: ad_names, status, page, size, sort
+- name: search_library_images_by_name
+  category: Ads & Creative
+  description: Search or list creative assets in the library across all content types — images, videos,
+    GIFs, and documents — with partial name matching, content-type filtering, and pagination. Omit the
+    name to browse everything.
+  key_parameters: imageName, contentTypes, page, size
+- name: unarchive_ad
+  category: Ads & Creative
+  description: Restore one or more archived ads to active status, preserving each ad's ID, creative, and
+    history. Find archived ad IDs first with search_ads_by_names using the archived status filter.
+  key_parameters: ids
+- name: update_brand_kit
+  category: Ads & Creative
+  description: Updates an existing brand kit with brand DNA parameters such as description, logos, color
+    palettes, typography, CTA system, tone, and photography style. Only the company URL is required; any
+    other field can be updated selectively.
+  key_parameters: company_url, logo_urls, primary_colors, primary_font, long_description, website_background
+- name: upload_image_creative
+  category: Ads & Creative
+  description: Downloads images from public URLs and uploads them to the platform's creative library,
+    returning image library IDs. Required before creating image ads, since every ad references an uploaded
+    creative asset.
+  key_parameters: images
+- name: upload_video_creative
+  category: Ads & Creative
+  description: Downloads videos from public URLs and uploads them to the platform's creative library,
+    returning a video library ID for use as the creative in video ads. Video formats only; an optional
+    image library ID can be attached as the thumbnail.
+  key_parameters: videos, thumbnail_library_id
+- name: create_update_offer
+  category: Offers
+  description: Create or update a Lead Gen offer (native forms inside LinkedIn, Facebook, or Instagram)
+    or a Landing Page offer (external page usable on every channel). Note that native Lead Gen offers
+    are permanently locked to the channel they are created for, while Landing Page offers are reusable
+    across channels.
+  key_parameters: offer_type, data.offerName, data.channel, data.fields, data.landingPageUrl, data.goal
+- name: find_offer_url
+  category: Offers
+  description: Locates the best specific landing-page URL for a marketing offer on a given domain by probing
+    common paths, scanning the sitemap, and scraping page links in parallel. Rejects generic hub pages
+    so offers always point at a specific destination.
+  key_parameters: domain, offer_type, topic
+- name: find_privacy_url
+  category: Offers
+  description: Finds a website's privacy-policy URL using a waterfall of robots.txt, sitemap, and page-scrape
+    strategies. Use it to auto-populate the privacy URL when creating lead-gen offers or to verify compliance.
+  key_parameters: domain
+- name: get_offer
+  category: Offers
+  description: Looks up an offer by name and returns its details (description, assets, configuration),
+    or lists all available offers when no name is provided.
+  key_parameters: name
+- name: remove_offers_from_campaign
+  category: Offers
+  description: Remove offers — lead-gen forms or landing pages — from one or more channels in an existing
+    campaign, referenced by channel type and offer name. The offer type and IDs are resolved automatically.
+  key_parameters: campaign_id, channel_offers
+- name: add_keywords_to_negative_lists
+  category: Keywords & Paid Search
+  description: Appends keywords to one or more existing Google Ads negative keyword lists so future ads
+    stop matching those search terms. Supports a single match type for the whole batch or per-keyword
+    match types in one call.
+  key_parameters: negativeListIds, keywords, match_type, channel
+- name: create_keywords
+  category: Keywords & Paid Search
+  description: Batch-creates positive keywords in the platform keyword library, from a single term to
+    hundreds at once. Created keywords become available for targeting and optimization in search campaigns.
+  key_parameters: keywords
+- name: create_negative_keywords_list
+  category: Keywords & Paid Search
+  description: Creates a negative keywords list for Google Ads campaigns to prevent ads from showing on
+    irrelevant search terms, such as competitor brands or low-intent queries. Accounts are limited to
+    20 negative keyword lists.
+  key_parameters: name, keywords, match_type, channel
+- name: delete_negative_keyword_lists
+  category: Keywords & Paid Search
+  description: Permanently delete one or more Google Ads negative keyword lists, including every keyword
+    they contain; campaigns using a deleted list lose the attachment. Multiple list IDs can be batched
+    into a single call.
+  key_parameters: listIds, channel
+- name: experiments_keywords_stats
+  category: Keywords & Paid Search
+  description: Returns keyword performance data across active experiments for a given date range, including
+    Google Ads keyword metrics, trends, ROI, and conversions.
+  key_parameters: startDate, endDate
+- name: get_negative_keywords_list_details
+  category: Keywords & Paid Search
+  description: Fetches the individual keywords inside a Google Ads negative keyword list, with text filtering,
+    pagination, and sorting. Use to inspect existing exclusions before adding or removing entries.
+  key_parameters: listId, text, page, size, sort, channel
+- name: list_experiment_keywords
+  category: Keywords & Paid Search
+  description: Search keywords currently running in experiments, filtered by keyword or experiment name.
+    Returns the keyword, its external ID, experiment ID and name, and status — the IDs you need before
+    pausing a keyword.
+  key_parameters: keywordOrExperimentName, page, size
+- name: list_keywords
+  category: Keywords & Paid Search
+  description: List and search account keywords with pagination, name filtering (single term or multiple),
+    and sorting by search volume, bid range, name, or modified date. Useful for building keyword lists
+    and analyzing search-volume and bid metrics.
+  key_parameters: name, archived, sort, page, size
+- name: list_negative_keywords_list
+  category: Keywords & Paid Search
+  description: List negative-keyword lists, optionally filtered by one or more (partial) names. Accounts
+    are limited to 20 negative-keyword lists, so this also serves to check the current count. Currently
+    supports Google Ads only.
+  key_parameters: name, channel
+- name: list_search_terms
+  category: Keywords & Paid Search
+  description: Review the Google Ads search terms report — the actual queries that triggered your ads
+    — with filters, sorting, and pagination. Use it to surface wasteful queries and decide which terms
+    to add to a negative-keyword list.
+  key_parameters: searchTerm, experiment, keyword, matchType, startDate/endDate, sort
+- name: pause_experiment_keyword
+  category: Keywords & Paid Search
+  description: Pause a specific keyword within an experiment without removing it. Requires the keyword's
+    external ID and the experiment ID (from list_experiment_keywords); the operation is asynchronous,
+    so the status may take time to update.
+  key_parameters: keywordExternalId, wizExperimentId
+- name: remove_keywords_from_campaign
+  category: Keywords & Paid Search
+  description: Remove Google Ads keyword groups and/or detach negative keyword lists from a draft campaign's
+    Google Ads channel, typically before replacing them with a new set. Keyword removal is only allowed
+    while the campaign is in draft.
+  key_parameters: campaign_id, channel_keywords, channel_negative_keyword_lists, channel_id
+- name: remove_keywords_from_negative_list
+  category: Keywords & Paid Search
+  description: Remove keywords from an existing Google Ads negative keyword list by exact text match.
+    All match types for a given text are removed, and unmatched inputs are reported back without failing
+    the call.
+  key_parameters: listId, keywords, channel
+- name: restart_experiment_keyword
+  category: Keywords & Paid Search
+  description: Restart a previously paused keyword in a keyword experiment so it resumes running. Find
+    the keyword's external ID and experiment ID via list_experiment_keywords first; the status change
+    is applied asynchronously.
+  key_parameters: keywordExternalId, wizExperimentId
+- name: account_funnel_reports
+  category: Analytics & Insights
+  description: Retrieves account-level funnel performance across stages, from accounts reached by campaigns
+    through engaged, converted, MQL, opportunity, and closed-won. Use it to analyze how target accounts
+    progress through the marketing funnel over a date range.
+  key_parameters: startDate, endDate, reportTab, sort, size, page
+- name: account_level_stats
+  category: Analytics & Insights
+  description: Returns account-wide statistics with a per-channel breakdown for a given period, including
+    spend, impressions, clicks, leads, MQLs, pipeline, and ROI metrics. Supports preset timeframes (week,
+    quarter, year) or a custom start/end date range.
+  key_parameters: timeframe, startDate, endDate
+- name: account_list_performance
+  category: Analytics & Insights
+  description: Reports engagement and performance metrics for ABM account lists, including reached, engaged,
+    converted, and qualified accounts plus pipeline influence. Useful for comparing list effectiveness
+    and analyzing the account journey funnel.
+  key_parameters: channels, startDate, endDate, sort, size, page
+- name: budget_group_performance
+  category: Analytics & Insights
+  description: Returns detailed performance statistics for a budget group referenced by name, including
+    spend, leads, MQLs, CPL, CTR, conversion rates, and pipeline metrics for the experiments it contains.
+    Accepts an optional date range; omitting dates returns all-time data.
+  key_parameters: budget_group_name, startDate, endDate, sort, size, excludeExperimentName
+- name: deep_funnel_stats
+  category: Analytics & Insights
+  description: Run a comprehensive funnel conversion analysis for a given funnel and date range, including
+    stage progression, ROI metrics, pipeline attribution, and experiment performance. Supports ALL, TRIGGERED,
+    or INFLUENCED opportunity attribution models.
+  key_parameters: funnel_id, startDate, endDate, opportunityModel
+- name: demographic_country_stats
+  category: Analytics & Insights
+  description: Return advertising performance metrics grouped by country, covering spend, impressions,
+    clicks, leads, MQLs, pipeline, and cost efficiency across Facebook, Instagram, LinkedIn, and Google
+    Ads. Supports custom date ranges, sorting, and pagination.
+  key_parameters: channels, fromMonth, toMonth, sort, size, page
+- name: experiment_performance_stats
+  category: Analytics & Insights
+  description: 'Retrieves experiment-level performance statistics: spend, leads, impressions, clicks,
+    CPL, CTR, MQLs, and pipeline metrics. Supports filtering by campaign, ad, audience, offer, channel,
+    and date range for comparisons, ROI analysis, and top-performer ranking.'
+  key_parameters: name, campaignName, startDate, endDate, sort, size
+- name: get_account_conversions_insights
+  category: Analytics & Insights
+  description: Returns converted people (conversions) for one or more account domains, with sorting by
+    created date, recent activity, or email, plus date-range filtering and pagination.
+  key_parameters: domains, startDate, endDate, sort, page, size
+- name: get_account_opportunities_insights
+  category: Analytics & Insights
+  description: Retrieves CRM opportunities associated with one or more account domains, with filtering
+    by opportunity status (open, closed won, closed lost, or no opportunities), date range, sorting, and
+    pagination.
+  key_parameters: domains, status, startDate, endDate, sort, page/size
+- name: get_account_summary_insights
+  category: Analytics & Insights
+  description: Returns a comprehensive account summary for specific domains, including engagement metrics
+    (total touches, channels, website visits), revenue data (open and closed-won opportunity amounts),
+    and company details such as industry, employee count, and engagement score.
+  key_parameters: domains
+- name: get_account_timeline_insights
+  category: Analytics & Insights
+  description: Returns a chronological timeline of marketing, sales, and opportunity touchpoints for one
+    or more account domains — ad impressions, website visits, lead conversions, sales tasks, and opportunity
+    events — with filtering by touchpoint type, contact email, and date range.
+  key_parameters: domains, touchPoints, startDate, endDate, email, page/size
+- name: get_converted_leads
+  category: Analytics & Insights
+  description: Returns lead-level converted lead records captured by campaigns, with rich filtering by
+    campaign, channel, audience, job title, company, country, quality signals, and dates. Ideal for lead
+    audits, ICP-fit analysis, and looking up individual leads.
+  key_parameters: campaignName, channels, jobTitle, startDate/endDate, qualityTypes, page/size
+- name: get_converted_leads_summary
+  category: Analytics & Insights
+  description: Returns fast aggregate statistics on converted leads — totals by channel, MQL counts and
+    rates, enrichment coverage, marketing-automation sync counts, and pipeline tie-back — without individual
+    lead rows. Accepts the same filters as the lead-level endpoint. Call this first to establish a baseline
+    before pulling lead rows.
+  key_parameters: campaignName, channels, startDate/endDate, qualityTypes, audienceTypes
+- name: get_insights_report
+  category: Analytics & Insights
+  description: Queries account journey insights across many accounts with filtering, sorting, and pagination.
+    Use for bulk analysis, trend exploration, or building segments from criteria; not for single-account
+    lookups.
+  key_parameters: criteria, accountName, startDate, endDate, sort, page
+- name: get_segment_criteria
+  category: Analytics & Insights
+  description: Returns the full criteria object for a saved segment, looked up by ID or name, along with
+    its processing status. Pass the returned criteria object (not the segment ID) to get_insights_report.
+  key_parameters: segment_id, segment_name
+- name: list_segments
+  category: Analytics & Insights
+  description: List saved segments (reusable filter configurations), optionally fuzzy-searched by name.
+    Returns segment IDs and names; fetch a segment's criteria to use it in an insights report.
+  key_parameters: name, sort
+- name: performance_metrics
+  category: Analytics & Insights
+  description: Pull granular performance metrics for ads, audiences, creatives, offers, target groups,
+    or keywords, with extensive filters (channel, ad format, date range, spend/CPL thresholds) and sorting.
+    Note that conversation and message ads are measured by opens, sends, and action clicks rather than
+    clicks or CTR.
+  key_parameters: endpoint, startDate, endDate, channels, adFormats, sort
+- name: query_metadata_analytics_account
+  category: Analytics & Insights
+  description: Query a rolled-up summary of your own account's context — firmographics, recent 90-day
+    campaign history, drafts, and per-experiment performance — using natural language. Use it to ground
+    recommendations in account history; for live campaign state or real-time spend, use the live analytics
+    tools instead.
+  key_parameters: question
+- name: query_metadata_analytics_benchmarks
+  category: Analytics & Insights
+  description: Query cross-account industry benchmarks and priors from the Metadata marketing knowledge
+    base. Ask about a cohort (industry, company size, channel, ad format) rather than a specific company.
+  key_parameters: question, conversation_id
+- name: search_insights_criteria_fields
+  category: Analytics & Insights
+  description: Discover the filter fields available for building insights criteria, returning each field's
+    name, label, type, operators, and options. Call before get_insights_report or create_segment when
+    filtering is needed.
+  key_parameters: search_keywords
+- name: website_engagement_stats
+  category: Analytics & Insights
+  description: Retrieves website visitor engagement metrics such as sessions, page views, visitor counts,
+    bounce rate, session duration, and conversions for a chosen timeframe. Supports pagination and sorting
+    by any metric.
+  key_parameters: dateRange, page, size, sort
+- name: create_google_business_logo_extension
+  category: Ad Extensions
+  description: Attaches a business logo from the image library to Google Ads text ads for brand recognition
+    (beta). Optionally pairs the logo with a business name and domain for reuse in Microsoft Ads.
+  key_parameters: image_library_id, business_name, domain_name
+- name: create_google_callout_extension
+  category: Ad Extensions
+  description: Adds a short, non-clickable selling-point snippet (for example "Free Shipping" or "24/7
+    Support") that appears beneath a Google Ads ad to reinforce value propositions.
+  key_parameters: callout_text
+- name: create_google_image_extension
+  category: Ad Extensions
+  description: Attaches 1-20 product or lifestyle images from the image library to a Google Ads text ad
+    to improve click-through (beta). Supports alt text, an overlaid caption, and a destination URL.
+  key_parameters: image_library_ids, alternative_text, display_text, destination_url
+- name: create_google_lead_form_extension
+  category: Ad Extensions
+  description: Attaches an inline lead-capture form to a Google Ads ad so prospects can submit their email
+    plus optional contact and work details without leaving the search results page. Captured leads flow
+    directly into Metadata.
+  key_parameters: headline, business_name, email_lead_form_user_input_types, privacy_policy_url, call_to_action_type,
+    post_submit_headline
+- name: create_google_price_extension
+  category: Ad Extensions
+  description: Adds a price list of 3-8 tiles beneath a Google Ads ad, each with a plan name, short description,
+    USD amount, and billing unit. Ideal for SaaS pricing tiers, subscription plans, service menus, or
+    rate cards.
+  key_parameters: price_qualifier, price_offerings (url, header, description, amount, unit)
+- name: create_google_promotion_extension
+  category: Ad Extensions
+  description: Creates a time-bound promotional offer shown under a Google Ads ad — choose a percent or
+    dollar discount, optionally attach a promo code or minimum-order qualifier, tag a holiday occasion,
+    and set the start/end window.
+  key_parameters: occasion, url, item, category_type, details_type, start_date/end_date
+- name: create_google_sitelink_extension
+  category: Ad Extensions
+  description: Adds a clickable sitelink beneath a Google Ads ad — a deep link such as "See Pricing" or
+    "Book a Demo" with two short description lines, giving searchers alternate landing paths and lifting
+    click-through rate.
+  key_parameters: url, link_text, description1, description2
+- name: create_google_structured_snippet_extension
+  category: Ad Extensions
+  description: Adds a labeled list of offerings (structured snippet) beneath a Google Ads ad — a category
+    header such as "Brands" or "Services" plus 3-10 short items, helping searchers self-qualify before
+    clicking.
+  key_parameters: header, values
+- name: create_microsoft_business_logo_extension
+  category: Ad Extensions
+  description: Attaches your business logo to a Microsoft Ads (Bing) text ad for brand recognition, referencing
+    a logo already uploaded to the image library and optionally pairing it with the business name and
+    domain shown on the results page. Currently in beta.
+  key_parameters: image_library_id, business_name, domain_name
+- name: create_microsoft_callout_extension
+  category: Ad Extensions
+  description: Adds a short non-clickable selling-point snippet beneath a Microsoft Ads (Bing) ad — trust-building
+    phrases like "Free Shipping" or "24/7 Support" that reinforce value props without using headline space.
+  key_parameters: callout_text
+- name: create_microsoft_image_extension
+  category: Ad Extensions
+  description: Attaches 1-20 product or lifestyle images to a Microsoft Ads (Bing) text ad to lift click-through,
+    referencing assets already uploaded to the image library by ID. Currently in beta.
+  key_parameters: image_library_ids, alternative_text, display_text, destination_url
+- name: create_microsoft_price_extension
+  category: Ad Extensions
+  description: Adds a price list of 3-8 tiles beneath a Microsoft Ads (Bing) ad, each with a plan name,
+    short description, USD amount, and billing unit. Ideal for SaaS pricing tiers, subscription plans,
+    service menus, or rate cards.
+  key_parameters: price_qualifier, price_offerings (url, header, description, amount, unit)
+- name: create_microsoft_promotion_extension
+  category: Ad Extensions
+  description: Creates a time-bound promotional offer shown under a Microsoft Ads (Bing) ad — choose a
+    percent or dollar discount, optionally attach a promo code or minimum-order qualifier, tag a holiday
+    occasion, and set the start/end window.
+  key_parameters: occasion, url, item, category_type, details_type, start_date/end_date
+- name: create_microsoft_sitelink_extension
+  category: Ad Extensions
+  description: Adds a clickable sitelink extension beneath a Microsoft Ads (Bing) ad, such as "See Pricing"
+    or "Book a Demo", with two short description lines. Sitelinks lift click-through rate by giving searchers
+    alternate landing paths.
+  key_parameters: url, link_text, description1, description2
+- name: create_microsoft_structured_snippet_extension
+  category: Ad Extensions
+  description: 'Adds a structured snippet extension to Microsoft Ads (Bing): a category header (e.g. "Brands",
+    "Services") plus 3-10 short items shown beneath the ad, helping searchers self-qualify before clicking.'
+  key_parameters: header, values
+- name: connect_channel
+  category: Accounts & Integrations
+  description: Generates the OAuth authorization URL used to connect an advertising channel account (LinkedIn,
+    Meta/Facebook/Instagram, Google Ads, Reddit, or X) to the platform. Present the URL to the user, who
+    completes authorization in their browser and confirms when done.
+  key_parameters: channel, is_mcp_client
+- name: connect_crm
+  category: Accounts & Integrations
+  description: Generates the OAuth authorization URL used to connect a CRM system (Salesforce or HubSpot)
+    to the platform. Present the URL to the user, who completes authorization on the CRM's site and confirms
+    when done.
+  key_parameters: crm
+- name: disconnect_channel
+  category: Accounts & Integrations
+  description: Disconnect an advertising channel integration (Facebook, Instagram, LinkedIn, Twitter/X,
+    Reddit, or Google Ads) from the account. Disconnection is immediate and may affect active campaigns
+    on that channel; the channel must be reconnected to resume advertising.
+  key_parameters: channel
+- name: get_account_details
+  category: Accounts & Integrations
+  description: Returns details about the authenticated user and current account, including account name,
+    status, enabled channels, and subscription plan.
+  key_parameters: (none)
+- name: get_integrations_status
+  category: Accounts & Integrations
+  description: Returns connection status for all advertising channels, martech platforms, and CRM systems,
+    including connection health, linked business accounts, and any errors. Useful for verifying setup
+    or troubleshooting why campaigns are not running.
+  key_parameters: platformName
+- name: impersonate_account
+  category: Accounts & Integrations
+  description: Switches the active account context so all subsequent tool calls read from and write to
+    the specified account. This is the standard account switcher for agency operators and multi-account
+    users; authorization is enforced by the platform.
+  key_parameters: account_id
+- name: list_user_accounts
+  category: Accounts & Integrations
+  description: List the accounts the current user can access, with optional partial-name filtering. Returns
+    user ID, email, default account, and each account's ID, name, and role; super users must supply a
+    name filter to search platform-wide.
+  key_parameters: name
+- name: stop_impersonation
+  category: Accounts & Integrations
+  description: Switch back from a client account to your own default account, reversing impersonate_account.
+    Safe to call even when not currently impersonating.
+  key_parameters: (none)
+- name: get_current_date
+  category: Utilities
+  description: Returns the real current date and time in UTC, plus year and quarter. Call this before
+    any date-dependent operation (campaign dates, relative ranges like 'last 30 days') instead of guessing
+    today's date. Takes no parameters.
+  key_parameters: none

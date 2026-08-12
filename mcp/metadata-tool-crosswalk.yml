@@ -1,0 +1,460 @@
+generated: '2026-08-12'
+method: derived
+source: mcp/metadata-mcp.yml + openapi/metadata-mcp-server-openapi.json
+note: 'Metadata is MCP-native. Its published contract surface is 141 MCP tools; the only OpenAPI it serves
+  describes two health endpoints on the MCP server itself. The crosswalk therefore has zero bound rows
+  and is itself the finding: there is no REST API to bind the tools to.'
+surfaces:
+  openapi:
+    file: openapi/metadata-mcp-server-openapi.json
+    url: https://mcp-server.metadata.io/openapi.json
+    gated: false
+    operations: 2
+    scope: health checks only
+  mcp:
+    url: https://mcp-server.metadata.io/mcp
+    gated: true
+    gate: HTTP 401, OAuth bearer required
+    tools: 141
+  graphql: null
+crosswalk: []
+mcp_only:
+- tool: archive_audience
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_audience_from_segment
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_bombora_audience
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_csv_upload_linkedin_native_audience
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_facebook_native_criteria_audience
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_firmographic_audience
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_g2_intent_dynamic_audience
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_g2_intent_linkedin_native_dynamic_audience
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_g2_intent_static_audience
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_linkedin_native_criteria_audience
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_reddit_target_group
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_retargeting_audience
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_segment
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_target_group
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_technographic_audience
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: estimate_target_group
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_abm_account_lists
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_audience_details
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_custom_audience_contacts_csv_url
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_deep_audience_details
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_intent_topics
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_matched_audiences
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_retargeting_audiences
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: list_target_groups
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: retrieve_target_group_by_id
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: search_reddit_criteria
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: search_target_group_criteria
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: unarchive_audience
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: update_target_group
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: upload_account_list_csv_audience
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: upload_contact_list_csv_audience
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: add_and_edit_campaign_elements
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: add_and_edit_native_campaign_elements
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_budget_group
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_campaign
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_native_structure_campaign
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: duplicate_campaign
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_budget_group
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_campaign_by_wizard_id
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: launch_campaign
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: list_budget_groups
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: list_wizard_campaigns
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: manage_campaign
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: remove_ad_from_campaign
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: remove_audiences_from_campaign
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: remove_channels_from_campaign
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: remove_target_groups_from_campaign
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: search_campaigns_by_names
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: search_experiments
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: set_search_channel_final_url_suffix
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: update_experiments_daily_budgets
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: update_reddit_channel_settings
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: archive_ad
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_update_carousel_ad
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_update_convo_ad
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_update_document_ad
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_update_google_ads_ad
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_update_image_ad
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_update_linkedin_message_ad
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_update_video_ad
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: edit_brand_creative
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: fetch_creative_details
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: fix_flexible_creative
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: generate_brand_creative
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: generate_brand_kit
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: generate_flexible_brand_creative
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_ad_details
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_brand_kit
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_linkedin_senders
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: regenerate_flexible_background
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: render_flexible_creative
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: search_ads_by_names
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: search_library_images_by_name
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: unarchive_ad
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: update_brand_kit
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: upload_image_creative
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: upload_video_creative
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_update_offer
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: find_offer_url
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: find_privacy_url
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_offer
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: remove_offers_from_campaign
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: add_keywords_to_negative_lists
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_keywords
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_negative_keywords_list
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: delete_negative_keyword_lists
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: experiments_keywords_stats
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_negative_keywords_list_details
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: list_experiment_keywords
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: list_keywords
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: list_negative_keywords_list
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: list_search_terms
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: pause_experiment_keyword
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: remove_keywords_from_campaign
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: remove_keywords_from_negative_list
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: restart_experiment_keyword
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: account_funnel_reports
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: account_level_stats
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: account_list_performance
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: budget_group_performance
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: deep_funnel_stats
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: demographic_country_stats
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: experiment_performance_stats
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_account_conversions_insights
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_account_opportunities_insights
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_account_summary_insights
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_account_timeline_insights
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_converted_leads
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_converted_leads_summary
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_insights_report
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_segment_criteria
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: list_segments
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: performance_metrics
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: query_metadata_analytics_account
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: query_metadata_analytics_benchmarks
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: search_insights_criteria_fields
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: website_engagement_stats
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_google_business_logo_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_google_callout_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_google_image_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_google_lead_form_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_google_price_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_google_promotion_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_google_sitelink_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_google_structured_snippet_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_microsoft_business_logo_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_microsoft_callout_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_microsoft_image_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_microsoft_price_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_microsoft_promotion_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_microsoft_sitelink_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: create_microsoft_structured_snippet_extension
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: connect_channel
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: connect_crm
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: disconnect_channel
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_account_details
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_integrations_status
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: impersonate_account
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: list_user_accounts
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: stop_impersonation
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+- tool: get_current_date
+  reason: no public REST operation — Metadata publishes no REST API reference; the only OpenAPI it serves
+    (mcp-server.metadata.io/openapi.json) contains health checks only
+rest_only:
+- operationId: root_health_health_get
+  path: /health
+  method: get
+  reason: infrastructure health probe, not exposed as an MCP tool
+- operationId: mcp_health_mcp_health_get
+  path: /mcp/health
+  method: get
+  reason: infrastructure health probe, not exposed as an MCP tool
+coverage:
+  tools_total: 141
+  tools_bound_to_rest: 0
+  tools_mcp_only: 141
+  rest_operations_total: 2
+  rest_operations_unbound: 2
+  bound_percent: 0.0

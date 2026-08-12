@@ -1,0 +1,31 @@
+generated: '2026-08-12'
+method: searched
+source: https://metadata.io/developers/
+docs: https://metadata.io/developers/
+limit_count: 0
+limits: []
+response_headers: []
+exhaustion_status: null
+note: 'Metadata publishes NO rate limits. The developer introduction asserts "Rate limits are documented
+  up front", but no number, window, scope, response header (X-RateLimit-*, RateLimit-*, Retry-After) or
+  429 behaviour appears on any page of metadata.io/developers/ or metadata.io/mcp-server. An anonymous
+  probe of the MCP endpoint returns 401 with no rate-limit headers. The only published throttle is commercial,
+  not temporal: a per-call CREDIT cost (read 1, create/update 5, launch and creative generation 10-25)
+  with HTTP 402 insufficient_credits on exhaustion.'
+credit_metering:
+  model: credits per tool call
+  read: 1
+  create_update: 5
+  launch_and_creative: 10-25
+  exhaustion_status: 402
+  exhaustion_code: insufficient_credits
+  source: https://metadata.io/mcp-server
+checked_urls:
+- url: https://metadata.io/developers/
+  status: 200
+- url: https://metadata.io/developers/authentication.html
+  status: 200
+- url: https://metadata.io/mcp-server
+  status: 200
+- url: https://mcp-server.metadata.io/mcp
+  status: 401

@@ -1,0 +1,78 @@
+generated: '2026-08-12'
+method: searched
+source: https://metadata.io/developers/authentication.html
+docs: https://metadata.io/developers/authentication.html
+summary: All Metadata MCP requests are authenticated with a bearer API key scoped to a single account.
+  Keys are minted in the app, stored server-side only, shown exactly once, and can be rotated or revoked.
+  The MCP endpoint additionally advertises full OAuth 2.0 authorization-server and protected-resource
+  metadata for clients that negotiate rather than carry a static key.
+schemes:
+- id: api_key_bearer
+  type: http
+  scheme: bearer
+  in: header
+  name: Authorization
+  key_prefix: md1_live_
+  env_var: METADATA_API_KEY
+  minted_at: Settings > API Keys > Create Key
+  display_policy: shown exactly once
+  storage: server-side only
+  scoped_to: a single Metadata account
+  source: https://metadata.io/developers/authentication.html
+- id: oauth2
+  type: oauth2
+  flow: authorization_code
+  pkce:
+  - S256
+  issuer: https://mcp-server.metadata.io/
+  authorization_endpoint: https://mcp-server.metadata.io/authorize
+  token_endpoint: https://mcp-server.metadata.io/token
+  registration_endpoint: https://mcp-server.metadata.io/register
+  revocation_endpoint: https://mcp-server.metadata.io/revoke
+  grant_types:
+  - authorization_code
+  - refresh_token
+  token_endpoint_auth_methods:
+  - client_secret_post
+  - client_secret_basic
+  - private_key_jwt
+  - none
+  scopes_supported:
+  - openid
+  - offline_access
+  dynamic_client_registration: true
+  client_id_metadata_document_supported: true
+  method: probed
+  source: https://mcp-server.metadata.io/.well-known/oauth-authorization-server
+  note: RFC 8414 authorization-server metadata and RFC 9728 protected-resource metadata are both served
+    anonymously. The OAuth scopes_supported (openid, offline_access) are the transport-level scopes and
+    are DISTINCT from the seven product permission scopes documented for API keys — see scopes/metadata-scopes.yml.
+headers:
+- name: Authorization
+  value: Bearer <METADATA_API_KEY>
+  required: true
+- name: X-Account-ID
+  required: conditional
+  note: Required on every call for users with access to multiple Metadata accounts (agencies, holding
+    companies). Call list_user_accounts first to enumerate them.
+rotation:
+  cadence_recommended: quarterly
+  triggers:
+  - employee or contractor offboarding
+  - suspected key leak (logs, shared screen, repo commit)
+  - scope expansion or reduction for the agent
+  atomic: true
+  grace_window: the old key stays valid for 15 minutes after a new one is issued; older keys are hard-revoked
+    after the grace window
+  self_service: true
+  note: Docs state to rotate rather than contact support when a key is lost.
+guidance:
+- treat tokens like passwords
+- never commit to git
+- never log them
+- never paste into chat
+- name each key after the agent that will use it (claude-code-gil, hermes-prod, paperclip-sandbox)
+- scope keys to limit blast radius — an analytics-only key should not carry launch permissions
+inconsistency_note: The quickstart says to mint keys at app.metadataone.com; the authentication page says
+  platform.metadata.io. Both hosts are live and both are linked from the metadata.io nav ("AI agency"
+  and "Classic view" respectively). Recorded as published; not reconciled by API Evangelist.

@@ -1,0 +1,81 @@
+generated: '2026-08-12'
+method: searched
+source: https://metadata.io/developers/
+docs:
+- https://metadata.io/developers/
+- https://metadata.io/developers/authentication.html
+- https://metadata.io/developers/tools/
+- https://metadata.io/developers/guides/claude-code.html
+surface_note: Metadata is MCP-native. There is no public REST API reference, so these conventions describe
+  the MCP tool surface rather than HTTP resource semantics.
+auth_style:
+  style: bearer API key over MCP streamable-HTTP
+  header: 'Authorization: Bearer <METADATA_API_KEY>'
+  account_selector: X-Account-ID
+  see: authentication/metadata-authentication.yml
+idempotency:
+  supported: true
+  mechanism: documented tool semantics — no client-supplied idempotency key
+  header: null
+  scope: destructive tools
+  published_statement: '"Every destructive action (launch_campaign, connect_crm) is idempotent and clearly
+    marked."'
+  source: https://metadata.io/developers/
+  retention: not published
+  gap: Metadata publishes the idempotency GUARANTEE but no Idempotency-Key header, no key retention window,
+    and no documented replay response, so a client cannot make an arbitrary tool call safely retryable
+    on its own terms.
+pagination:
+  documented: false
+  note: No pagination style, parameters or response envelope is published for the list_* / search_* tools.
+field_expansion:
+  documented: false
+metadata_fields:
+  documented: false
+request_id_tracing:
+  supported: true
+  method: probed
+  headers:
+  - x-b3-traceid
+  - x-b3-spanid
+  - x-b3-sampled
+  - x-b3-debug
+  note: B3 (Zipkin) trace headers are returned on live responses from mcp-server.metadata.io, including
+    on the anonymous 401. Not documented, but present and usable for support correlation.
+  source: observed on POST https://mcp-server.metadata.io/mcp, 2026-08-12
+versioning:
+  mcp_protocol_version: '2025-06-18'
+  protocol_header: mcp-protocol-version
+  server_version: v1.0
+  docs_version: v2025.04
+  scheme: no URL or header API version for the tool surface; the MCP protocol version is negotiated and
+    echoed
+  see: lifecycle/metadata-lifecycle.yml
+error_envelope:
+  format: vendor code table (HTTP status + machine code)
+  rfc9457: false
+  see: errors/metadata-problem-types.yml
+rate_limit_signaling:
+  documented: false
+  note: The developer index claims "Rate limits are documented up front" but no limit, window, response
+    header or 429 behaviour appears anywhere in the published docs. See rate-limits/metadata-rate-limits.yml.
+response_shape:
+  published_statement: '"Every tool returns structured JSON. Every parameter has a schema."'
+  source: https://metadata.io/developers/
+  schemas_public: false
+  note: The JSON inputSchemas are only retrievable via an authenticated tools/list; the public catalog
+    lists key parameter names in prose.
+safety_model:
+  draft_first: create_campaign creates campaigns in Draft by default; launch_campaign is a separate transition
+    to LIVE where real spend begins.
+  scope_gating: read / write / launch scopes are separable so an agent can inspect and draft without spending
+    budget.
+  human_approval: Docs repeatedly direct buyers to keep campaign structure, creative, audiences, exclusions
+    and budget groups reviewable in the SaaS surface before launch.
+  source: https://metadata.io/developers/guides/claude-code.html
+cross_links:
+- errors/metadata-problem-types.yml
+- lifecycle/metadata-lifecycle.yml
+- authentication/metadata-authentication.yml
+- scopes/metadata-scopes.yml
+- rate-limits/metadata-rate-limits.yml

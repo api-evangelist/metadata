@@ -11,8 +11,14 @@ description: >-
   ad channels, CRMs (Salesforce, HubSpot), and marketing automation platforms
   (Marketo, Pardot) to run multivariate campaign testing at scale and optimize
   for pipeline and revenue rather than lead volume. Backed by 500 Global and
-  Partech. Metadata does not publish a public developer REST API; its integration
-  surface connects the platform to third-party ad and CRM APIs.
+  Partech. Metadata publishes no public REST API. Its developer surface is
+  MCP-native: the MetadataONE MCP server at mcp-server.metadata.io/mcp exposes
+  141 documented tools across audiences, campaigns, creatives, offers, keywords,
+  ad extensions, analytics and integrations, so an agent can build an audience,
+  generate on-brand creative, assemble a campaign and launch real paid spend
+  without a REST client or an SDK. Developer docs, a quickstart, an authentication
+  and scopes reference and the full tool catalog are published at
+  metadata.io/developers/.
 url: https://raw.githubusercontent.com/api-evangelist/metadata/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -22,19 +28,28 @@ x-backed-by:
 x-tier: stub
 x-tier-reason: portfolio-lead
 accessModel:
-  pricing: unknown
-  onboarding: unknown
+  pricing: contact-sales
+  onboarding: demo-gated
   trial: false
   try_now: false
   public: false
-  label: Unknown
-  confidence: low
-  source: []
-  generated: '2026-07-22'
-  method: derived
+  docs_public: true
+  label: Contact Sales
+  confidence: high
+  source:
+  - https://metadata.io/pricing
+  - https://metadata.io/mcp-server
+  - https://metadata.io/developers/quickstart.html
+  note: >-
+    Documentation, the 141-tool catalog and the OAuth metadata are fully public and
+    anonymous. Credentials are not: "Get API Key" on metadata.io/mcp-server routes to
+    /demo, and keys are minted only from inside a provisioned account. No price grid is
+    published; pricing is scoped in a sales working session.
+  generated: '2026-08-12'
+  method: searched
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-08-12'
 image: https://metadata.io/wp-content/uploads/2025/06/IMG-20250618-WA0007.webp
 tags:
 - Company
@@ -44,7 +59,82 @@ tags:
 - Advertising
 - B2B
 - Artificial Intelligence
-apis: []
+- MCP
+- Model Context Protocol
+- AI Agents
+- Paid Media
+- Account Based Marketing
+apis:
+- name: Metadata MCP Server (MetadataONE)
+  description: >-
+    The MetadataONE Model Context Protocol server — Metadata's only public developer
+    surface. 141 documented tools let an MCP client (Claude Code, Claude Desktop, Hermes,
+    Paperclip, OpenClaw or a custom agent) run B2B paid media end to end: build
+    firmographic, technographic, Bombora-intent, G2-intent, native-criteria, retargeting
+    and CSV-uploaded audiences; extract brand kits and generate on-brand image, video,
+    carousel, document and conversation ads; create lead-gen and landing-page offers;
+    assemble Precision (1x1x1) or Channel-First (NxNxN) campaigns inside a budget group;
+    launch them to real spend on LinkedIn, Meta, Google, Microsoft and Reddit; manage
+    keywords and Google/Microsoft ad extensions; and read funnel, experiment, ABM and
+    pipeline analytics. Authentication is a bearer API key (md1_live_ prefix) scoped to a
+    single account, with seven product permission scopes that separate read, draft and
+    launch. The endpoint also serves RFC 8414 authorization-server and RFC 9728
+    protected-resource metadata anonymously, so an OAuth-capable client can discover it
+    without credentials. Campaigns are created in Draft and only launch_campaign moves
+    real budget.
+  humanURL: https://metadata.io/developers/
+  baseURL: https://mcp-server.metadata.io
+  image: https://metadata.io/wp-content/uploads/2025/06/IMG-20250618-WA0007.webp
+  tags:
+  - MCP
+  - Model Context Protocol
+  - AI Agents
+  - Advertising
+  - Marketing Automation
+  - Demand Generation
+  - Audiences
+  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/metadata-mcp-server-openapi.json
+  - type: Overlay
+    url: overlays/metadata-mcp-server-overlay.yaml
+  - type: MCPServer
+    url: mcp/metadata-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/metadata-tool-crosswalk.yml
+  - type: Authentication
+    url: authentication/metadata-authentication.yml
+  - type: OAuthScopes
+    url: scopes/metadata-scopes.yml
+  - type: ErrorCatalog
+    url: errors/metadata-problem-types.yml
+  - type: Conventions
+    url: conventions/metadata-conventions.yml
+  - type: Idempotency
+    url: conventions/metadata-conventions.yml
+  - type: RateLimits
+    url: rate-limits/metadata-rate-limits.yml
+  - type: Lifecycle
+    url: lifecycle/metadata-lifecycle.yml
+  - type: DataModel
+    url: data-model/metadata-data-model.yml
+  - type: Conformance
+    url: conformance/metadata-conformance.yml
+  - type: Plans
+    url: plans/metadata-plans-pricing.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Documentation
+    url: https://metadata.io/developers/
+  - type: APIReference
+    url: https://metadata.io/developers/tools/
+  - type: GettingStarted
+    url: https://metadata.io/developers/quickstart.html
+  - type: StatusPage
+    url: https://metadata.io/developers/status.html
+  - type: Support
+    url: https://metadata.io/developers/support.html
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -68,11 +158,25 @@ common:
 - type: TrustCenter
   url: security/metadata-trust-center.yml
 - type: Compliance
-  url: https://metadata.io/trust-compliance/
+  url: https://metadata.io/trust-compliance
 - type: DomainSecurity
   url: security/metadata-domain-security.yml
+- type: DeveloperPortal
+  url: https://metadata.io/developers/
+- type: Documentation
+  url: https://metadata.io/developers/
+- type: APIReference
+  url: https://metadata.io/developers/tools/
+- type: GettingStarted
+  url: https://metadata.io/developers/quickstart.html
+- type: StatusPage
+  url: https://metadata.io/developers/status.html
+- type: LLMsTxt
+  url: llms/metadata-llms.txt
+- type: WellKnown
+  url: well-known/metadata-well-known.yml
 x-enrichment:
-  date: '2026-07-20'
-  status: minimal
-  artifacts_added: 2
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 23
   pass: local-v1

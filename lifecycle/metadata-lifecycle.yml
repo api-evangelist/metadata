@@ -1,0 +1,37 @@
+generated: '2026-08-12'
+method: searched
+source: https://metadata.io/developers/status.html
+versioning:
+  scheme: undated server + docs version stamps
+  current_server_version: v1.0
+  current_docs_version: v2025.04
+  mcp_protocol_version: '2025-06-18'
+  policy_published: false
+  note: No versioning policy, no version negotiation for the tool surface itself, and no changelog page.
+    The tool catalog carries a single "Updated 2026-07-12 from the live server schema" stamp.
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  note: No deprecation policy, no Sunset/Deprecation header documentation, and no deprecated tools flagged
+    in the 141-tool catalog.
+status_page:
+  url: https://metadata.io/developers/status.html
+  status: 200
+  fetched: '2026-08-12'
+  kind: static page
+  current_state: All systems operational
+  note: A hand-maintained static page inside the docs, not a hosted status service. It publishes no component
+    list, no incident history, no uptime figures and no subscribe/RSS feed.
+sla:
+  published: false
+  note: No SLA or uptime commitment is published on the pricing, trust or developer pages.
+support:
+  url: https://metadata.io/developers/support.html
+  email: support@metadata.io
+  help_center: https://help.metadata.io/
+changelog:
+  published: false
+  note: No dated changelog for the MCP tool surface.

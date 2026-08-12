@@ -1,0 +1,20 @@
+generated: '2026-08-12'
+method: generated
+source: https://metadata.io/developers/tools/ and https://metadata.io/developers/guides/first-campaign.html
+note: Packaged Agent Skills for the Metadata MCP surface. Every tool name referenced was verified against
+  the provider-published 141-tool catalog; no tool is invented. Metadata publishes no skills/ or AGENTS.md
+  of its own (searched 2026-08-12).
+skill_count: 3
+skills:
+- name: metadata-launch-multichannel-campaign
+  file: skills/metadata-launch-multichannel-campaign.md
+  description: Build a B2B paid campaign end to end and stop at the human launch approval.
+  risk: high — terminates at a spend-moving tool
+- name: metadata-audience-build-and-estimate
+  file: skills/metadata-audience-build-and-estimate.md
+  description: Pick the right audience constructor from stated intent and size it before committing credits.
+  risk: low — reversible, archive/unarchive only
+- name: metadata-performance-and-pipeline-reporting
+  file: skills/metadata-performance-and-pipeline-reporting.md
+  description: Read campaign, funnel, budget and pipeline performance with read-only tools.
+  risk: none — read:all scope only

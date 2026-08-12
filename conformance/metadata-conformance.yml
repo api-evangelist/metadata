@@ -1,0 +1,95 @@
+generated: '2026-08-12'
+method: derived
+source: well-known/metadata-oauth-authorization-server.json, well-known/metadata-oauth-protected-resource.json,
+  live probes of https://mcp-server.metadata.io/mcp, https://metadata.io/developers/, security/metadata-trust-center.yml
+standards:
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  version: '2025-06-18'
+  evidence: 'POST https://mcp-server.metadata.io/mcp answers JSON-RPC 2.0 and returns the header mcp-protocol-version:
+    2025-06-18; 141 tools are published in the provider tool catalog. Probed 2026-08-12 (401, auth-gated).'
+- id: oauth2
+  name: OAuth 2.0
+  conforms: true
+  evidence: Authorization code grant with refresh_token, authorize/token/revoke/register endpoints published
+    at https://mcp-server.metadata.io/.well-known/oauth-authorization-server (HTTP 200).
+- id: rfc8414
+  name: OAuth 2.0 Authorization Server Metadata
+  conforms: true
+  evidence: https://mcp-server.metadata.io/.well-known/oauth-authorization-server returns HTTP 200 JSON
+    with issuer, authorization_endpoint, token_endpoint, revocation_endpoint, registration_endpoint, grant_types_supported,
+    code_challenge_methods_supported.
+- id: rfc9728
+  name: OAuth 2.0 Protected Resource Metadata
+  conforms: true
+  evidence: 'A 401 from the MCP endpoint carries WWW-Authenticate: Bearer resource_metadata="https://mcp-server.metadata.io/.well-known/oauth-protected-resource/mcp",
+    and that URL returns HTTP 200 JSON with resource, authorization_servers, scopes_supported, bearer_methods_supported.'
+- id: rfc7636
+  name: PKCE
+  conforms: true
+  evidence: 'code_challenge_methods_supported: ["S256"] in the authorization server metadata.'
+- id: rfc7591
+  name: OAuth 2.0 Dynamic Client Registration
+  conforms: true
+  evidence: registration_endpoint https://mcp-server.metadata.io/register published in the AS metadata;
+    the endpoint answers 405 to GET (POST-only), confirming it is mounted.
+- id: rfc7009
+  name: OAuth 2.0 Token Revocation
+  conforms: true
+  evidence: revocation_endpoint and revocation_endpoint_auth_methods_supported published in the AS metadata.
+- id: oidc
+  name: OpenID Connect
+  conforms: false
+  evidence: scopes_supported includes "openid" but no /.well-known/openid-configuration is served on mcp-server.metadata.io
+    (404). platform.metadata.io returns 200 for that path but serves the SPA HTML shell, not a discovery
+    document.
+- id: openapi
+  name: OpenAPI
+  conforms: true
+  version: 3.1.0
+  evidence: https://mcp-server.metadata.io/openapi.json returns a valid OpenAPI 3.1.0 document — but it
+    describes only two health endpoints, not the product surface.
+- id: rfc9457
+  name: Problem Details for HTTP APIs
+  conforms: false
+  evidence: Errors are published as a vendor code table (missing_key, invalid_key, scope_denied, account_mismatch,
+    insufficient_credits); no application/problem+json media type appears in the docs or the served OpenAPI.
+- id: idempotency
+  name: Idempotent write semantics
+  conforms: true
+  evidence: 'Developer introduction: "Every destructive action (launch_campaign, connect_crm) is idempotent
+    and clearly marked." No client-supplied Idempotency-Key header is published — the guarantee is server-side
+    and untestable by the client.'
+- id: pagination
+  name: Documented pagination
+  conforms: false
+  evidence: No pagination style, parameters or envelope published for any list_* or search_* tool.
+- id: rfc8594
+  name: Sunset HTTP Header / deprecation signalling
+  conforms: false
+  evidence: No deprecation policy and no Sunset or Deprecation header documentation.
+- id: rfc9116
+  name: security.txt
+  conforms: false
+  evidence: https://metadata.io/.well-known/security.txt returns 301 to the marketing homepage; the path
+    404s on every other Metadata host probed.
+- id: llmstxt
+  name: llms.txt
+  conforms: true
+  evidence: 'https://metadata.io/llms.txt returns HTTP 200, 9,185 bytes, valid llms.txt structure. Caveat:
+    it advertises the host developers.metadata.io six times and that host has no DNS record.'
+- id: a2a
+  name: A2A Agent Card
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json return 404 on metadata.io, mcp-server.metadata.io,
+    platform.metadata.io, app.metadataone.com and help.metadata.io.
+compliance_programs:
+  source: https://trust.metadata.io/ and https://metadata.io/trust-compliance
+  certifications:
+  - SOC 2 Type II
+  - ISO 27001
+  - ISO 27701
+  - GDPR
+  - CSA STAR
+  see: security/metadata-trust-center.yml

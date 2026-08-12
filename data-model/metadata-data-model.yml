@@ -1,0 +1,311 @@
+generated: '2026-08-12'
+method: derived
+source: mcp/metadata-mcp.yml (141 provider-published MCP tools and their key parameters, from https://metadata.io/developers/tools/)
+derivation_note: 'Metadata publishes no REST reference and no JSON Schemas publicly, so this graph is
+  derived from tool NAMES and the "Key parameters" strings the provider publishes per tool, not from $ref
+  links in an OpenAPI. Relationships marked confidence: medium are read from parameter names (campaign_data.budgetGroup,
+  audiences[], ads[]); low means inferred from tool naming alone. No field-level schema is asserted.'
+entity_count: 14
+entities:
+- name: Account
+  description: A Metadata customer account; the tenant every API key is scoped to.
+  tools:
+  - get_account_details
+  - list_user_accounts
+  - impersonate_account
+  - stop_impersonation
+  id_field: account_id
+  id_example_shape: acc_… (from the quickstart response sample)
+  relationships:
+  - type: has_many
+    target: Campaign
+    confidence: high
+  - type: has_many
+    target: Integration
+    confidence: high
+  - type: has_many
+    target: BudgetGroup
+    confidence: medium
+- name: Campaign
+  description: 'A multi-channel paid campaign. Two structures: Precision Optimization (1x1x1, the default)
+    and Channel-First / Native (NxNxN). Created in Draft; launch_campaign transitions to LIVE and real
+    spend begins.'
+  tools:
+  - create_campaign
+  - create_native_structure_campaign
+  - duplicate_campaign
+  - launch_campaign
+  - manage_campaign
+  - add_and_edit_campaign_elements
+  - add_and_edit_native_campaign_elements
+  - get_campaign_by_wizard_id
+  - list_wizard_campaigns
+  - search_campaigns_by_names
+  id_field: campaign_id / campaignId (also addressed by wizard_id)
+  states:
+  - Draft
+  - LIVE
+  relationships:
+  - type: belongs_to
+    target: BudgetGroup
+    via: campaign_data.budgetGroup
+    confidence: high
+  - type: has_many
+    target: Audience
+    via: per-channel audiences
+    confidence: high
+  - type: has_many
+    target: Ad
+    via: per-channel ads
+    confidence: high
+  - type: has_many
+    target: Offer
+    via: per-channel offers
+    confidence: high
+  - type: has_many
+    target: Keyword
+    confidence: high
+  - type: has_many
+    target: TargetGroup
+    confidence: high
+  - type: has_many
+    target: Experiment
+    confidence: medium
+- name: BudgetGroup
+  description: Controls how much campaigns can spend. Lead Generation (CPL) and Brand Awareness (CTR/CPC)
+    configurations with monthly caps, benchmarks and redistribution strategies.
+  tools:
+  - create_budget_group
+  - get_budget_group
+  - list_budget_groups
+  - budget_group_performance
+  id_field: budget_group id
+  relationships:
+  - type: has_many
+    target: Campaign
+    confidence: high
+  - type: has_many
+    target: Experiment
+    confidence: medium
+- name: Audience
+  description: A targetable set of accounts or contacts. Built firmographically, technographically, from
+    Bombora or G2 intent, from native channel criteria, from retargeting, from a saved segment, or from
+    a CSV upload of 300–300,000 contacts.
+  tools:
+  - create_firmographic_audience
+  - create_technographic_audience
+  - create_bombora_audience
+  - create_g2_intent_dynamic_audience
+  - create_g2_intent_static_audience
+  - create_g2_intent_linkedin_native_dynamic_audience
+  - create_linkedin_native_criteria_audience
+  - create_facebook_native_criteria_audience
+  - create_retargeting_audience
+  - create_audience_from_segment
+  - upload_contact_list_csv_audience
+  - upload_account_list_csv_audience
+  - create_csv_upload_linkedin_native_audience
+  - get_audience_details
+  - get_deep_audience_details
+  - get_matched_audiences
+  - get_retargeting_audiences
+  - archive_audience
+  - unarchive_audience
+  id_field: audience id
+  relationships:
+  - type: belongs_to
+    target: Segment
+    via: create_audience_from_segment
+    confidence: medium
+  - type: has_many
+    target: Campaign
+    confidence: medium
+- name: TargetGroup
+  description: A reusable targeting definition, sized before use via estimate_target_group and discoverable
+    via search_target_group_criteria.
+  tools:
+  - create_target_group
+  - update_target_group
+  - list_target_groups
+  - retrieve_target_group_by_id
+  - estimate_target_group
+  - search_target_group_criteria
+  - create_reddit_target_group
+  - remove_target_groups_from_campaign
+  id_field: target_group_id
+  relationships:
+  - type: has_many
+    target: Campaign
+    confidence: medium
+- name: Segment
+  description: A saved insight segment used as an audience source.
+  tools:
+  - create_segment
+  - list_segments
+  - get_segment_criteria
+  relationships:
+  - type: has_many
+    target: Audience
+    confidence: medium
+- name: Ad
+  description: 'A creative unit placed in a campaign: image, video, carousel, document, conversation,
+    LinkedIn message or Google Ads ad.'
+  tools:
+  - create_update_image_ad
+  - create_update_video_ad
+  - create_update_carousel_ad
+  - create_update_document_ad
+  - create_update_convo_ad
+  - create_update_linkedin_message_ad
+  - create_update_google_ads_ad
+  - get_ad_details
+  - search_ads_by_names
+  - archive_ad
+  - unarchive_ad
+  - remove_ad_from_campaign
+  relationships:
+  - type: belongs_to
+    target: Campaign
+    confidence: high
+  - type: belongs_to
+    target: Creative
+    confidence: medium
+- name: Creative
+  description: The generated or uploaded visual asset behind an ad, including AI-generated and flexible
+    creatives.
+  tools:
+  - generate_brand_creative
+  - generate_flexible_brand_creative
+  - edit_brand_creative
+  - render_flexible_creative
+  - fix_flexible_creative
+  - regenerate_flexible_background
+  - fetch_creative_details
+  - upload_image_creative
+  - upload_video_creative
+  - search_library_images_by_name
+  relationships:
+  - type: belongs_to
+    target: BrandKit
+    confidence: high
+- name: BrandKit
+  description: Brand identity (colors, fonts, logo, tone) extracted from a domain and used to keep generated
+    creative on-brand.
+  tools:
+  - generate_brand_kit
+  - get_brand_kit
+  - update_brand_kit
+  relationships:
+  - type: has_many
+    target: Creative
+    confidence: high
+- name: Offer
+  description: The conversion destination attached to a campaign channel — landing page or lead gen form.
+    Lead Gen offers are locked to the channel they were created for.
+  tools:
+  - create_update_offer
+  - get_offer
+  - find_offer_url
+  - find_privacy_url
+  - remove_offers_from_campaign
+  relationships:
+  - type: belongs_to
+    target: Campaign
+    confidence: high
+- name: Keyword
+  description: Paid-search keywords, negative keyword lists and search terms.
+  tools:
+  - create_keywords
+  - list_keywords
+  - list_search_terms
+  - create_negative_keywords_list
+  - add_keywords_to_negative_lists
+  - remove_keywords_from_negative_list
+  - delete_negative_keyword_lists
+  - get_negative_keywords_list_details
+  - list_negative_keywords_list
+  - remove_keywords_from_campaign
+  - list_experiment_keywords
+  - pause_experiment_keyword
+  - restart_experiment_keyword
+  - experiments_keywords_stats
+  relationships:
+  - type: belongs_to
+    target: Campaign
+    confidence: high
+  - type: belongs_to
+    target: Experiment
+    confidence: medium
+- name: Experiment
+  description: The unit of optimization — in the Precision structure every audience x ad x offer combination
+    runs as its own isolated experiment with its own daily budget.
+  tools:
+  - search_experiments
+  - experiment_performance_stats
+  - update_experiments_daily_budgets
+  - list_experiment_keywords
+  - experiments_keywords_stats
+  relationships:
+  - type: belongs_to
+    target: Campaign
+    confidence: high
+  - type: belongs_to
+    target: BudgetGroup
+    confidence: medium
+- name: AdExtension
+  description: 'Google Ads and Microsoft Ads extension assets: sitelink, callout, price, promotion, structured
+    snippet, image, business logo, lead form.'
+  tools:
+  - create_google_sitelink_extension
+  - create_google_callout_extension
+  - create_google_price_extension
+  - create_google_promotion_extension
+  - create_google_structured_snippet_extension
+  - create_google_image_extension
+  - create_google_business_logo_extension
+  - create_google_lead_form_extension
+  - create_microsoft_sitelink_extension
+  - create_microsoft_callout_extension
+  - create_microsoft_price_extension
+  - create_microsoft_promotion_extension
+  - create_microsoft_structured_snippet_extension
+  - create_microsoft_image_extension
+  - create_microsoft_business_logo_extension
+  relationships:
+  - type: belongs_to
+    target: Campaign
+    confidence: low
+- name: Integration
+  description: A connected ad channel (LinkedIn, Meta, Google, Microsoft, Reddit) or CRM/MAP (Salesforce,
+    HubSpot). Connect/disconnect are destructive and require write:integrations.
+  tools:
+  - connect_channel
+  - disconnect_channel
+  - connect_crm
+  - get_integrations_status
+  relationships:
+  - type: belongs_to
+    target: Account
+    confidence: high
+reporting_surface:
+  note: Analytics tools read across the graph rather than owning entities of their own.
+  tools:
+  - account_level_stats
+  - account_funnel_reports
+  - deep_funnel_stats
+  - performance_metrics
+  - demographic_country_stats
+  - website_engagement_stats
+  - account_list_performance
+  - get_account_summary_insights
+  - get_account_timeline_insights
+  - get_account_conversions_insights
+  - get_account_opportunities_insights
+  - get_converted_leads
+  - get_converted_leads_summary
+  - get_insights_report
+  - query_metadata_analytics_account
+  - query_metadata_analytics_benchmarks
+  - search_insights_criteria_fields
+  - get_abm_account_lists
+  - get_intent_topics

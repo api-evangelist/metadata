@@ -1,0 +1,38 @@
+generated: '2026-08-12'
+method: searched
+source: https://metadata.io/developers/authentication.html
+docs: https://metadata.io/developers/authentication.html
+note: Two distinct scope vocabularies. The seven PRODUCT scopes below are attached to API keys at mint
+  time and gate MCP tool access. The OAuth authorization server separately advertises only the transport
+  scopes openid and offline_access.
+scope_count: 7
+scopes:
+- name: read:all
+  description: All get_*, search_*, list_*, *_stats and *_insights tools
+  destructive: false
+- name: write:audiences
+  description: Create, update, archive audiences and target groups
+  destructive: false
+  note: documented as reversible
+- name: write:creatives
+  description: Generate or upload creatives, build ads
+  destructive: false
+- name: write:campaigns
+  description: Create and edit campaigns in Draft, excluding launch
+  destructive: false
+- name: launch:campaigns
+  description: launch_campaign, manage_campaign — real spend begins
+  destructive: true
+- name: write:integrations
+  description: Connect and disconnect ad channels and CRMs
+  destructive: true
+- name: admin:*
+  description: Account impersonation, billing, user management
+  destructive: true
+oauth_scopes:
+- name: openid
+  source: https://mcp-server.metadata.io/.well-known/oauth-authorization-server
+- name: offline_access
+  source: https://mcp-server.metadata.io/.well-known/oauth-authorization-server
+least_privilege_guidance: 'Docs: "If a key only needs analytics, do not grant launch permissions." The
+  Hermes config example ships with launch = false to gate launches behind human approval.'

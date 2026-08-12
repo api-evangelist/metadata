@@ -1,0 +1,31 @@
+generated: '2026-08-12'
+method: searched
+source: https://metadata.io/pricing
+docs: https://metadata.io/pricing
+plan_count: 0
+plans: []
+model: contact-sales only
+note: Metadata publishes no price grid and no named tiers. The pricing page states pricing is scoped in
+  a working session and depends on channels under management, the ad spend the agents operate, and how
+  much of the workflow the customer delegates. The only public number attached to the API is the MCP server
+  page claim of "$0 to start", and a credit-metered per-call cost model (read 1 credit, create/update
+  5, launch/creative 10-25) with no published credit price or included allowance. The quickstart response
+  example shows a plan field with value "operator", which is the only plan NAME visible anywhere in public
+  material.
+signup:
+  self_serve: false
+  path: Book a Demo
+  url: https://metadata.io/demo
+  api_key: Get API Key on metadata.io/mcp-server routes to /demo — an API key requires a sales conversation.
+metering:
+  unit: credit
+  read: 1
+  create_update: 5
+  launch_and_creative: 10-25
+  unit_price: not published
+  included_allowance: not published
+checked_urls:
+- url: https://metadata.io/pricing
+  status: 200
+- url: https://metadata.io/mcp-server
+  status: 200

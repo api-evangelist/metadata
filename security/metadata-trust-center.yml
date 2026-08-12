@@ -1,20 +1,29 @@
-generated: '2026-07-20'
+generated: '2026-08-12'
 method: searched
 probe: true
 source: https://trust.metadata.io/
 url: https://trust.metadata.io/
-docs: https://metadata.io/trust-compliance/
+docs: https://metadata.io/trust-compliance
 certifications:
 - SOC 2 Type II
-- ISO 27001
-- ISO 27701
+- ISO/IEC 27001
+- ISO/IEC 27701
 - GDPR
+- CCPA
 - CSA STAR
 evidence:
 - source: https://trust.metadata.io/
+  status: 200
+  fetched: '2026-08-12'
   keywords:
-  - soc 2
+  - soc 2 type ii
   - iso/iec 27001
-  - trust center
+  - iso/iec 27701
+  - iso 27001:2022
   - gdpr
+  - ccpa
   - csa star
+  - trust center
+  note: >-
+    Hosted trust center with a named auditor (EY) and named SOC 2 Type II control references.
+    The public marketing summary lives at https://metadata.io/trust-compliance.

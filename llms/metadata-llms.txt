@@ -1,0 +1,91 @@
+# Metadata
+
+> Metadata is the execution layer for enterprise B2B paid campaigns. Marketing leaders use the prompt-first interface at metadata.io to ask for outcomes, and six AI agents build audiences, generate copy, creative, offers, landing pages, lead gen ads, images, and videos, draft campaigns, manage budgets, run experiments, and optimize spend across social, search, LLM, and video channels. Operators review campaign structure, assets, budget controls, and approvals in platform.metadata.io. Developers and agents can connect headlessly through Metadata MCP.
+
+## Public Proof
+- Trusted by 200+ B2B SaaS companies
+- Customer stories include Zoom, Pendo, Instruqt, Writer, Docebo, N-Able, Webex Events, Fingerprint, Cacheflow, Titan, GoodTime, and Nitrogen Wealth
+- G2 profile: 4.6 stars, 299 reviews
+
+## Platform
+- [Platform Overview](https://metadata.io/platform): Enterprise paid media execution layer for audiences, creative, offers, campaigns, budgets, optimization, reporting, and MCP handoff
+- [Audience Targeting (MetaMatch)](https://metadata.io/platform/audience-targeting): B2B audience building with firmographic, technographic, and intent data
+- [Campaign Automation](https://metadata.io/platform/campaign-automation): Multi-channel paid campaign orchestration
+- [Revenue Optimization](https://metadata.io/platform/revenue-optimization): Connect ad spend to pipeline and revenue
+- [Campaign Experimentation](https://metadata.io/platform/campaign-experimentation): A/B and multivariate testing at scale
+- [Integrations](https://metadata.io/platform/integrations): CRM, MAP, and ad channel connectors
+
+## Developer and MCP
+- [Developer Docs](https://developers.metadata.io/): Connect Claude Code, Hermes, OpenClaw, or custom agents to Metadata MCP
+- [Quickstart](https://developers.metadata.io/quickstart.html): Install, authenticate, and make the first Metadata tool call
+- [Authentication](https://developers.metadata.io/authentication.html): API key setup, scopes, and error handling
+- [Tool Catalog](https://developers.metadata.io/tools/): 121 documented MCP tools for audiences, campaigns, creatives, budgets, analytics, experiments, targeting, integrations, and brand kits
+- [Claude Code Setup](https://developers.metadata.io/guides/claude-code.html): Add the Metadata MCP server to Claude Code, Claude Desktop, Hermes, Paperclip, OpenClaw, and custom agents
+- [First Campaign Guide](https://developers.metadata.io/guides/first-campaign.html): Build an audience, generate creatives, assemble campaign drafts, request approval, and launch
+
+## AI Agents
+- [AI Agents Overview](https://metadata.io/agents): Six AI agents - Mei, Zoe, Max, Ann, Tom, and Raj - that collaborate to plan, build, launch, analyze, and operate B2B demand generation
+- [LinkedIn Bid Agent](https://metadata.io/agents/linkedin-bid-agent): AI bid optimization for LinkedIn Ads — 155% more pipeline
+
+## Blog Posts
+- [ABM Examples](https://metadata.io/resources/blog/account-based-marketing-examples): 12 account-based marketing examples that drove real pipeline
+- [B2B Lead Gen Companies](https://metadata.io/resources/blog/top-b2b-lead-generation-companies): Top B2B lead generation companies buyer's guide
+- [Marketing Automation Benefits](https://metadata.io/resources/blog/marketing-automation-benefits): 15 reasons B2B teams automate marketing
+- [Targeted Marketing](https://metadata.io/resources/blog/targeted-marketing): Targeted marketing campaign strategy guide for B2B
+- [PPC Spying](https://metadata.io/resources/blog/ppc-spying): How to analyze competitor PPC ad strategies
+- [B2B Audience Targeting](https://metadata.io/resources/blog/how-to-target-b2b-audience): Complete guide to targeting a B2B audience
+- [Ad Performance](https://metadata.io/resources/blog/ad-performance): How to measure and improve B2B ad performance
+- [Smart Targeting](https://metadata.io/resources/blog/smart-targeting): How AI transforms B2B audience selection
+- [PPC Agency Guide](https://metadata.io/resources/blog/ppc-agency): What PPC agencies do and whether you need one
+- [Performance Marketing Agency](https://metadata.io/resources/blog/performance-marketing-agency): What they do and how to choose
+- [ABX Marketing](https://metadata.io/resources/blog/abx-marketing): Account-based experience marketing guide
+- [PPC Consultant](https://metadata.io/resources/blog/ppc-consultant): PPC consultant guide with cost and alternatives
+
+## Resources
+- [Resources](https://metadata.io/resources): Decision-maker resource hub for comparisons, customer proof, buyer guides, campaign strategy, AI agents, and developer access
+- [Resources Blog Archive](https://metadata.io/resources/blog): Migration-safe archive index for legacy resources blog posts
+- [Podcasts](https://metadata.io/resources/podcasts): Migrated podcast index for B2B Category Creators, Demand Gen U, and standalone episodes
+- [Demand Resources](https://metadata.io/resources/demand): Migrated demand generation videos, events, and campaign resources
+- [Newsroom](https://metadata.io/resources/newsroom): Company news, press mentions, and public recognition archive
+- [Bid Agent](https://metadata.io/agents/bid-agent): Main Bid Agent landing path with links to LinkedIn Bid Agent and free trial
+- [Blog](https://metadata.io/blog): Insights on B2B demand generation, ABM, and AI marketing
+- [Customer Stories](https://metadata.io/customers): 16 case studies from Zoom, Gainsight, Pendo, Instruqt, N-Able, Nitrogen Wealth, GoodTime, Webex Events, and more
+- [Guides](https://metadata.io/guides): In-depth playbooks for demand gen, ABM, LinkedIn optimization
+- [Comparisons](https://metadata.io/comparisons): Metadata versus ABM intelligence platforms, agencies, AI SDR tools, native ad channels, and generic AI tools
+- [Buyer's Guide](https://metadata.io/buyers-guide): Evaluation framework for AI paid media execution platforms
+- [2026 B2B Paid Media Benchmark Report](https://metadata.io/benchmark-report-2026): Interactive benchmarks from $57.6M of 2025 B2B ad spend — CPL, CPC, CTR by channel plus pipeline ROI, CAC and close rates, filterable by company size, industry, channel, ad type and campaign goal; ungated
+- [Benchmark: Tactical Lessons from $58M in Ad Spend](https://metadata.io/benchmark/tactical-lessons-58m-ad-spend): CPL by channel, lead gen forms vs landing pages, ad format playbook, LinkedIn retargeting fix
+- [Benchmark: Strategic Lessons from $58M in Ad Spend](https://metadata.io/benchmark/strategic-lessons-58m-ad-spend): Triggered vs influenced pipeline ROI, CAC by audience and format, why CPL misleads
+
+## Industries (focus verticals)
+- [Industries Overview](https://metadata.io/industries): Metadata focuses on three verticals where paid demand gen is the core pipeline engine
+- [SaaS](https://metadata.io/industries/saas): Demand generation for B2B SaaS companies
+- [MarTech](https://metadata.io/industries/martech): Demand gen for marketing technology vendors
+- [Cybersecurity](https://metadata.io/industries/cybersecurity): B2B marketing for cybersecurity vendors
+
+## Use Cases
+- [Use Cases Overview](https://metadata.io/use-cases): How teams use Metadata
+- [Demand Generation](https://metadata.io/use-cases/demand-gen): Automated B2B demand generation
+- [Account-Based Marketing](https://metadata.io/use-cases/abm): ABM campaign automation
+- [Enterprise Demand Gen](https://metadata.io/use-cases/enterprise): Enterprise-scale demand generation
+- [Product-Led Growth](https://metadata.io/use-cases/plg): PLG marketing automation
+
+## Integrations
+- [All Integrations](https://metadata.io/platform/integrations): 20+ integrations with CRM, MAP, ad channels, intent data, analytics, and more
+- [Salesforce](https://metadata.io/platform/integrations/salesforce): CRM sync, pipeline attribution
+- [HubSpot](https://metadata.io/platform/integrations/hubspot): Contact sync, deal attribution
+- [LinkedIn Ads](https://metadata.io/platform/integrations/linkedin-ads): Campaign automation, bid optimization
+- [Facebook Ads](https://metadata.io/platform/integrations/facebook-ads): Audience targeting, creative testing
+- [Google Ads](https://metadata.io/platform/integrations/google-ads): Search and display campaign management
+- [Bombora](https://metadata.io/platform/integrations/bombora): Intent data for audience targeting
+- [Snowflake](https://metadata.io/platform/integrations/snowflake): Data warehouse integration
+
+## Company
+- [Company](https://metadata.io/company): Metadata company and positioning as the execution layer for B2B paid media
+- [Book a Demo](https://metadata.io/demo): See Metadata in action
+- [Trust & Compliance](https://metadata.io/trust-compliance): Security, governance, permissions, auditability, and approval controls for AI-driven paid media execution
+- [Services](https://metadata.io/services): Human onboarding, campaign architecture, creative strategy, integrations, and MCP rollout support
+- [Careers](https://metadata.io/careers): Careers building AI campaign execution systems
+
+## Tutorials
+- [Tutorials — Learn the Metadata Platform](https://metadata.io/resources/tutorials/): 121 video lessons — getting started, audiences, campaigns, reporting, attribution, integrations
