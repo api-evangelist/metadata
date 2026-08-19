@@ -1,0 +1,32 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MCP Metadata Server",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Root Health",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/health"
+      },
+      "docs": "Health check endpoint at root path"
+    },
+    {
+      "info": {
+        "name": "Mcp Health",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/mcp/health"
+      },
+      "docs": "Health check endpoint at MCP path"
+    }
+  ],
+  "bundled": true
+}

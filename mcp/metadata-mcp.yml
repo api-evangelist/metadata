@@ -906,3 +906,10 @@ tools:
     any date-dependent operation (campaign dates, relative ranges like 'last 30 days') instead of guessing
     today's date. Takes no parameters.
   key_parameters: none
+deployment:
+  mode: remote
+  endpoint: https://mcp-server.metadata.io/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census
