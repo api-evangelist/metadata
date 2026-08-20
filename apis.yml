@@ -60,6 +60,18 @@ tags:
 - B2B
 - Artificial Intelligence
 - MCP
+- AI Agents
+- Paid Media
+- Account Based Marketing
+tags_raw:
+- Company
+- Marketing
+- Marketing Automation
+- Demand Generation
+- Advertising
+- B2B
+- Artificial Intelligence
+- MCP
 - Model Context Protocol
 - AI Agents
 - Paid Media
@@ -86,6 +98,14 @@ apis:
   baseURL: https://mcp-server.metadata.io
   image: https://metadata.io/wp-content/uploads/2025/06/IMG-20250618-WA0007.webp
   tags:
+  - MCP
+  - AI Agents
+  - Advertising
+  - Marketing Automation
+  - Demand Generation
+  - Audiences
+  - Campaigns
+  tags_raw:
   - MCP
   - Model Context Protocol
   - AI Agents
