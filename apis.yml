@@ -77,50 +77,16 @@ tags_raw:
 - Paid Media
 - Account Based Marketing
 apis:
-- name: Metadata MCP Server (MetadataONE)
-  description: >-
-    The MetadataONE Model Context Protocol server — Metadata's only public developer
-    surface. 141 documented tools let an MCP client (Claude Code, Claude Desktop, Hermes,
-    Paperclip, OpenClaw or a custom agent) run B2B paid media end to end: build
-    firmographic, technographic, Bombora-intent, G2-intent, native-criteria, retargeting
-    and CSV-uploaded audiences; extract brand kits and generate on-brand image, video,
-    carousel, document and conversation ads; create lead-gen and landing-page offers;
-    assemble Precision (1x1x1) or Channel-First (NxNxN) campaigns inside a budget group;
-    launch them to real spend on LinkedIn, Meta, Google, Microsoft and Reddit; manage
-    keywords and Google/Microsoft ad extensions; and read funnel, experiment, ABM and
-    pipeline analytics. Authentication is a bearer API key (md1_live_ prefix) scoped to a
-    single account, with seven product permission scopes that separate read, draft and
-    launch. The endpoint also serves RFC 8414 authorization-server and RFC 9728
-    protected-resource metadata anonymously, so an OAuth-capable client can discover it
-    without credentials. Campaigns are created in Draft and only launch_campaign moves
-    real budget.
+- aid: metadata:metadata-health-api
+  name: Metadata Health API
+  description: The Health API from Metadata — 1 operation(s) for health.
   humanURL: https://metadata.io/developers/
   baseURL: https://mcp-server.metadata.io
-  image: https://metadata.io/wp-content/uploads/2025/06/IMG-20250618-WA0007.webp
   tags:
-  - MCP
-  - AI Agents
-  - Advertising
-  - Marketing Automation
-  - Demand Generation
-  - Audiences
-  - Campaigns
-  tags_raw:
-  - MCP
-  - Model Context Protocol
-  - AI Agents
-  - Advertising
-  - Marketing Automation
-  - Demand Generation
-  - Audiences
-  - Campaigns
+  - Health
   properties:
   - type: OpenAPI
-    url: openapi/metadata-mcp-server-openapi.json
-  - type: Overlay
-    url: overlays/metadata-mcp-server-overlay.yaml
-  - type: MCPServer
-    url: mcp/metadata-mcp.yml
+    url: openapi/metadata-health-api-openapi.yml
   - type: ToolCrosswalk
     url: mcp/metadata-tool-crosswalk.yml
   - type: Authentication
@@ -143,8 +109,48 @@ apis:
     url: conformance/metadata-conformance.yml
   - type: Plans
     url: plans/metadata-plans-pricing.yml
-  - type: AgentSkill
-    url: skills/_index.yml
+  - type: Documentation
+    url: https://metadata.io/developers/
+  - type: APIReference
+    url: https://metadata.io/developers/tools/
+  - type: GettingStarted
+    url: https://metadata.io/developers/quickstart.html
+  - type: StatusPage
+    url: https://metadata.io/developers/status.html
+  - type: Support
+    url: https://metadata.io/developers/support.html
+- aid: metadata:metadata-mcp-api
+  name: Metadata MCP API
+  description: The Mcp API from Metadata — 1 operation(s) for mcp.
+  humanURL: https://metadata.io/developers/
+  baseURL: https://mcp-server.metadata.io
+  tags:
+  - Mcp
+  properties:
+  - type: OpenAPI
+    url: openapi/metadata-mcp-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/metadata-tool-crosswalk.yml
+  - type: Authentication
+    url: authentication/metadata-authentication.yml
+  - type: OAuthScopes
+    url: scopes/metadata-scopes.yml
+  - type: ErrorCatalog
+    url: errors/metadata-problem-types.yml
+  - type: Conventions
+    url: conventions/metadata-conventions.yml
+  - type: Idempotency
+    url: conventions/metadata-conventions.yml
+  - type: RateLimits
+    url: rate-limits/metadata-rate-limits.yml
+  - type: Lifecycle
+    url: lifecycle/metadata-lifecycle.yml
+  - type: DataModel
+    url: data-model/metadata-data-model.yml
+  - type: Conformance
+    url: conformance/metadata-conformance.yml
+  - type: Plans
+    url: plans/metadata-plans-pricing.yml
   - type: Documentation
     url: https://metadata.io/developers/
   - type: APIReference
@@ -161,6 +167,12 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/metadata-mcp-server-overlay.yaml
+- type: MCPServer
+  url: mcp/metadata-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
 - type: Website
   url: https://metadata.io
 - type: Support
