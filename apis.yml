@@ -136,6 +136,8 @@ apis:
   humanURL: https://metadata.io/developers/
   baseURL: https://mcp-server.metadata.io
   tags:
+  - MCP
+  tags_raw:
   - Mcp
   properties:
   - type: OpenAPI
