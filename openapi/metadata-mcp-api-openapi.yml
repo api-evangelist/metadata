@@ -1,0 +1,20 @@
+openapi: 3.2.0
+info:
+  title: Metadata Server MCP API
+  version: 1.0.0
+tags:
+- name: Mcp
+paths:
+  /mcp/health:
+    get:
+      summary: Mcp Health
+      description: Health check endpoint at MCP path
+      operationId: mcp_health_mcp_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Mcp

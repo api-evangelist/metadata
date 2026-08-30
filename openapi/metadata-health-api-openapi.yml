@@ -1,0 +1,20 @@
+openapi: 3.2.0
+info:
+  title: MCP Metadata Server Health API
+  version: 1.0.0
+tags:
+- name: Health
+paths:
+  /health:
+    get:
+      summary: Root Health
+      description: Health check endpoint at root path
+      operationId: root_health_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Health
