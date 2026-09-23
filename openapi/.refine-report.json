@@ -1,0 +1,26 @@
+{
+  "provider": "metadata",
+  "sources": [
+    "_original/metadata-mcp-server-openapi.json"
+  ],
+  "outputs": [
+    "metadata-health-api-openapi.yml",
+    "metadata-mcp-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "metadata-mcp-server-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "metadata-mcp-server-openapi.json: tagged paths GET /health -> Health",
+    "metadata-mcp-server-openapi.json: tagged paths GET /mcp/health -> Mcp",
+    "metadata-mcp-server-openapi.json: declared missing tag: Health",
+    "metadata-mcp-server-openapi.json: declared missing tag: Mcp",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "metadata-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "metadata-mcp-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

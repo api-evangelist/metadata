@@ -3,7 +3,7 @@ info:
   title: Metadata Server MCP API
   version: 1.0.0
 tags:
-- name: Mcp
+- name: MCP
 paths:
   /mcp/health:
     get:
@@ -17,4 +17,4 @@ paths:
             application/json:
               schema: {}
       tags:
-      - Mcp
+      - MCP
