@@ -64,6 +64,134 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Metadata is a company surfaced as a portfolio company of 500-global, partech and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Metadata (metadata.io) is a B2B marketing automation and demand-generation platform that uses AI agents to plan, execute, and optimize paid advertising campaigns across LinkedIn, Meta (Facebook and Instagram), Google Search and Display, Reddit, and Bing. Its core products are Metadata Campaigns (automated full-funnel paid campaign execution), Metadata Audiences with the patented MetaMatch B2B audience engine for precision targeting, and Metadata Insights for real-time, revenue-focused performance analytics. The platform connects to ad channels, CRMs (Salesforce, HubSpot), and marketing automation platforms (Marketo, Pardot) to run multivariate campaign testing at scale and optimize for pipeline and revenue rather than lead volume. Backed by 500 Global and Partech. Metadata publishes no public REST API. Its developer surface is MCP-native: the MetadataONE MCP server at mcp-server.metadata.io/mcp exposes 141 documented tools across audiences, campaigns, creatives, offers, keywords, ad extensions, analytics and integrations, so an agent can build an audience, generate on-brand creative, assemble a campaign and launch real paid spend without a REST client or an SDK. Developer docs, a quickstart, an authentication and scopes reference and the full tool catalog are published at metadata.io/developers/.
 
-Backed by: 500-global, partech — https://metadata.io
+**Areas:** Company · Marketing · Marketing Automation · Demand Generation · Advertising · B2B · Artificial Intelligence · MCP · AI Agents · Paid Media · Account Based Marketing
+
+## Metadata on APIs.io
+
+Everything profiled for Metadata is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/metadata/](https://apis.io/providers/metadata/)** — or go straight to one of the APIs or properties below.
+
+### APIs (2)
+
+- [Metadata Health API](https://apis.io/apis/metadata/metadata-health-api/) — The Health API from Metadata — 1 operation(s) for health.
+- [Metadata MCP API](https://apis.io/apis/metadata/metadata-mcp-api/) — The Mcp API from Metadata — 1 operation(s) for mcp.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [Metadata MCP Server (MetadataONE)](https://apis.io/servers/metadata/metadata-mcp-server-metadataone/)
+
+#### Collections (1)
+
+Postman and Open Collection request collections.
+
+- [MCP Metadata Server](https://apis.io/collections/metadata/open-metadata-mcp-server/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Metadata Mcp Server Overlay](https://apis.io/overlays/metadata/metadata-mcp-server-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Metadata Authentication](https://apis.io/security/metadata/metadata-authentication/)
+- [Metadata Domain Security](https://apis.io/security/metadata/metadata-domain-security/)
+- [Metadata Trust Center](https://apis.io/security/metadata/metadata-trust-center/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Metadata Scopes](https://apis.io/scopes/metadata/metadata-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Metadata Plans Pricing](https://apis.io/plans/metadata/metadata-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Metadata Rate Limits](https://apis.io/rate-limits/metadata/metadata-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://metadata.io)
+- [Documentation](https://metadata.io/developers/)
+- [Getting started](https://metadata.io/developers/quickstart.html)
+- [API reference](https://metadata.io/developers/tools/)
+- [Pricing](https://metadata.io/pricing/)
+- [Support](https://help.metadata.io/)
+- [Blog](https://metadata.io/resources/blog/)
+- [Compliance](https://metadata.io/trust-compliance)
+- [Terms of service](https://metadata.io/terms-of-use/)
+- [Privacy policy](https://metadata.io/privacy-policy/)
+- [Status](https://metadata.io/developers/status.html)
+
+## API Evangelist rating
+
+**Kin Score 45.2** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 37.3 |
+| Contract governance | 4.5 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 58.9 |
+| Access clarity | 53.9 |
+
+**Agent readiness 54.0** — agent-native
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | na |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 36.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/metadata/](https://apis.io/providers/metadata/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Metadata: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/metadata/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
